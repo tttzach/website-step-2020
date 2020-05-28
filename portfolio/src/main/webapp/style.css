@@ -1,5 +1,58 @@
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 60%;
+  text-align: right;
+}
+
+.right {
+  width: 40%;
+  text-align: left;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  text-align: center;
+}
+
+p.red:hover {
+  color: red;
+}
+
+p.green:hover {
+  color: forestgreen;
+}
+
+p.yellow:hover {
+  color: gold;
+}
+
+p.blue:hover {
+  color: blue;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+  color: blue;
 }
