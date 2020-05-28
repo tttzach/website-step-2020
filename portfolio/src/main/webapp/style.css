@@ -8,18 +8,18 @@
   box-sizing: border-box;
 }
 
-.row {
-  float: center;
-  height: 450px;
-  text-align: center;
-}
-
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
   padding: 10px;
   text-align: center;
   display: inline-block;
+}
+
+.row {
+  float: center;
+  height: 450px;
+  text-align: center;
 }
 
 .left {
@@ -40,7 +40,7 @@
 span {
   display: inline-block;
   vertical-align: middle;
-  line-height: 18px; /* <-- adjust this */
+  line-height: 18px;
 }
 
 /* Clear floats after the columns */
@@ -66,13 +66,14 @@ p.blue:hover {
   color: blue;
 }
 
+.link:hover {
+  color: blue;
+}
+
+/* Reset hyperlink format */
 .link {
   text-decoration: none;
   color: black;
-}
-
-.link:hover {
-  color: blue;
 }
 
 .containerTab {
@@ -84,7 +85,7 @@ p.blue:hover {
   display: none;
 }
 
-/* Closable button inside the image */
+/* Closable button inside the containerTab */
 .closebtn {
   float: right;
   color: white;
