@@ -11,18 +11,3 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-/**
- * Adds a random greeting to the page.
- */
-function addRandomQuote() {
-  const quotes =
-      ["I am your father.", "You're a wizard, Harry.", "Meow."];
-
-  // Pick a random greeting.
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-  // Add it to the page.
-  const quoteContainer = document.getElementById('quote-container');
-  quoteContainer.innerText = quote;
-}
