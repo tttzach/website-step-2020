@@ -12,3 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Hide all elements with class="containerTab", except for the one that matches the clickable grid column
+function openTab(tabName) {
+  var i, x;
+  x = document.getElementsByClassName("containerTab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "inline-block";
+}

@@ -21,10 +21,31 @@
     </div>
     <div class="column right">
       <h2>Column 2</h2>
-      <p class="red">about me</p>
-      <p class="green">technical</p>
-      <p class="yellow">personal</p>
+      <p class="red" onclick="openTab('about me');">about me</p>
+      <p class="green" onclick="openTab('technical');">technical</p>
+      <p class="yellow" onclick="openTab('personal');">personal</p>
       <a class="link" href="https://www.linkedin.com/in/tttzach">linkedin</a>
+    <!-- The expanding grid (hidden by default) -->
+    </div>
+  <div class="row">
+    <div id="about me" class="containerTab">
+      <!-- If you want the ability to close the container, add a close button -->
+      <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+      <h2>About Me</h2>
+      <p>Lorem ipsum..</p>
+    </div>
+    <div id="technical" class="containerTab">
+      <!-- If you want the ability to close the container, add a close button -->
+      <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+      <h2>Technical</h2>
+      <p>Lorem ipsum..</p>
+    </div>
+    <div id="personal" class="containerTab">
+      <!-- If you want the ability to close the container, add a close button -->
+      <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+      <h2>Personal</h2>
+      <p>Lorem ipsum..</p>
+    </div>
   </div>
 
   </body>

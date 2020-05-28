@@ -8,20 +8,33 @@
   box-sizing: border-box;
 }
 
+.row {
+  float: center;
+  height: 40%;
+  text-align: center;
+  vertical-align: center;
+}
+
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
   padding: 10px;
+  text-align: center;
+  display: inline-block;
 }
 
 .left {
   width: 60%;
+  height: 100%;
   text-align: right;
+  background-color: lightpink;
 }
 
 .right {
   width: 40%;
+  height: 100%;
   text-align: left;
+  background-color: lightsalmon;
 }
 
 /* Clear floats after the columns */
@@ -29,7 +42,6 @@
   content: "";
   display: table;
   clear: both;
-  text-align: center;
 }
 
 p.red:hover {
@@ -55,4 +67,21 @@ p.blue:hover {
 
 .link:hover {
   color: blue;
+}
+
+.containerTab {
+  float: center;
+  width: 80%;
+  padding: 20px;
+  color: white;
+  background: green;
+  display: none;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
 }
