@@ -14,9 +14,9 @@
 
 // Hide all elements with class="containerTab", except for the one that matches the clickable grid column
 function openTab(tabName) {
-  containerTab = document.getElementsByClassName("containerTab");
-  for (i = 0; i < containerTab.length; i++) {
-    containerTab[i].style.display = "none";
+  containerTabs = document.getElementsByClassName("containerTab");
+  for (containerTab of containerTabs) {
+    containerTab.style.display = "none";
   }
   document.getElementById(tabName).style.display = "inline-block";
 }
