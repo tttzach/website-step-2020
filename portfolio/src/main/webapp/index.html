@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>Zachary's Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <img src="images/cat.jpg"/>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomQuote()">Hello</button>
-      <div id="quote-container"></div>
-    </div>
-  </body>
-</html>
+<meta charset="UTF-8">
+<title>a terrible website</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<!-- Two-column layout -->
+<div class="row">
+  <div class="column-left">
+    <h1>definitely not zachary's website.</h1>
+    <img src="images/me.jpg" width="403.2" height="302.4">
+  </div>
+  <div class="column-right">
+    <span>
+    <p class="about-me" onclick="openTab('about-me');">about me
+    <p class="technical" onclick="openTab('technical');">technical
+    <p class="personal" onclick="openTab('personal');">personal
+    <p><a class="linkedin" href="https://www.linkedin.com/in/tttzach">linkedin</a>
+    </span>
+  </div>
+<!-- Expanding grid (hidden by default) -->
+<div class="row">
+  <div id="about-me" class="containerTab">
+    <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+    <h2>About Me</h2>
+    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major in Combinatorics & Optimization and a minor in Computer Science. Feel free to click on the other tabs for more not-so-exciting information about me.
+  </div>
+  <div id="technical" class="containerTab">
+    <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+    <h2>Technical</h2>
+    <p>Over the last few years, I worked on a number of pet projects and participated hackathons.
+  </div>
+  <div id="personal" class="containerTab">
+    <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+    <h2>Personal</h2>
+    <p>Here is a peek into my life during the University of Waterloo days.
+  </div>
+</div>

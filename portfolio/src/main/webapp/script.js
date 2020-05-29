@@ -12,17 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomQuote() {
-  const quotes =
-      ["I am your father.", "You're a wizard, Harry.", "Meow."];
-
-  // Pick a random greeting.
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-  // Add it to the page.
-  const quoteContainer = document.getElementById('quote-container');
-  quoteContainer.innerText = quote;
+// Hide all elements with class="containerTab", except for the one that matches the clickable grid column
+function openTab(tabName) {
+  containerTabs = document.getElementsByClassName("containerTab");
+  for (containerTab of containerTabs) {
+    containerTab.style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "inline-block";
 }

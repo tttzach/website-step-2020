@@ -1,9 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+.about-me:hover {
+  color: red;
+}
+
+/* Closable button inside the containerTab */
+.closebtn {
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 35px;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column-left {
+  background-color: lightpink;
+  float: left;
+  height: 100%;
+  padding: 10px;
+  text-align: right;
+  width: 60%;
+}
+
+.column-right {
+  background-color: lightsalmon;
+  float: left;
+  height: 100%;
+  line-height: 450px;
+  padding: 10px;
+  text-align: left;
+  width: 40%;
+}
+
+.containerTab {
+  background: green;
+  color: white;
+  display: none;
+  float: center;
+  padding: 20px;
+  width: 80%;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  text-align: center;
 }
 
-#greeting-container {
-  margin-top: 20px;
+/* Reset hyperlink format */
+.linkedin {
+  color: black;
+  text-decoration: none;
+}
+
+.linkedin:hover {
+  color: blue;
+}
+
+.personal:hover {
+  color: gold;
+}
+
+.row {
+  float: center;
+  height: 450px;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+span {
+  display: inline-block;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.technical:hover {
+  color: forestgreen;
 }
