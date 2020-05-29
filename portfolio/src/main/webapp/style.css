@@ -1,40 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column-left {
+  float: left;
+  padding: 10px;
+  display: inline-block;
+  width: 60%;
+  height: 100%;
+  text-align: right;
+  /* background-color: lightpink; */
+}
+
+.column-right {
+  float: left;
+  padding: 10px;
+  display: inline-block;
+  width: 40%;
+  height: 100%;
+  line-height: 450px;
+  text-align: left;
+  /* background-color: lightsalmon; */
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-/* Create two unequal columns that floats next to each other */
-.column {
-  float: left;
-  padding: 10px;
-  text-align: center;
-  display: inline-block;
-}
-
 .row {
   float: center;
   height: 450px;
   text-align: center;
-}
-
-.left {
-  width: 60%;
-  height: 100%;
-  text-align: right;
-  background-color: lightpink;
-}
-
-.right {
-  width: 40%;
-  height: 100%;
-  line-height: 450px;
-  text-align: left;
-  background-color: lightsalmon;
 }
 
 span {
