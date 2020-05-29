@@ -49,28 +49,24 @@ span {
   clear: both;
 }
 
-p.red:hover {
+.about-me:hover {
   color: red;
 }
 
-p.green:hover {
+.technical:hover {
   color: forestgreen;
 }
 
-p.yellow:hover {
+.personal:hover {
   color: gold;
 }
 
-p.blue:hover {
-  color: blue;
-}
-
-.link:hover {
+.linkedin:hover {
   color: blue;
 }
 
 /* Reset hyperlink format */
-.link {
+.linkedin {
   text-decoration: none;
   color: black;
 }
