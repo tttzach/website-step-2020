@@ -26,14 +26,14 @@ var slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+function plusSlides(offset) {
+  showSlides(slideIndex += offset);
 }
 
-function showSlides(n) {
+function showSlides(offset) {
   var slides = document.getElementsByClassName("slide");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
+  if (offset > slides.length) {slideIndex = 1}
+  if (offset < 1) {slideIndex = slides.length}
   for (slide of slides) {
       slide.style.display = "none";
   }
