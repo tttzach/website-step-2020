@@ -89,17 +89,19 @@ span {
   cursor: pointer;
 }
 
-
-/* Slideshow container */
 .slideshow-container {
-  max-width: 500px;
+  max-width: 700px;
   position: relative;
   margin: auto;
 }
 
 /* Hide the images by default */
-.mySlides {
+.slide {
   display: none;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
 
 /* Next & previous buttons */
@@ -117,6 +119,7 @@ span {
   user-select: none;
 }
 
+/* Position the "prev button" to the left */
 .prev {
   left: 0;
   border-radius: 0 3px 3px 0;
@@ -153,36 +156,12 @@ span {
   top: 0;
 }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
+@-webkit-keyframes slide {
   from {opacity: .4}
   to {opacity: 1}
 }
 
-@keyframes fade {
+@keyframes slide {
   from {opacity: .4}
   to {opacity: 1}
 }
