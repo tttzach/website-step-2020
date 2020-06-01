@@ -2,6 +2,24 @@
   box-sizing: border-box;
 }
 
+@-webkit-keyframes slide {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes slide {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Google Sans Regular'), local('GoogleSans-Regular'), url(https://fonts.gstatic.com/s/googlesans/v16/4UaGrENHsxJlGDuGo1OIlL3Kwp5MKg.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
 .about-me:hover {
   color: red;
   cursor: pointer;
@@ -17,31 +35,36 @@
 
 /* Create two unequal columns that floats next to each other */
 .column-left {
-  background-color: lightpink;
+  font-family: 'Google Sans';
+  background-color: #4285F4;
   float: left;
   height: 100%;
   padding: 10px;
   text-align: right;
   width: 60%;
+  color: white;
 }
 
 .column-right {
-  background-color: lightsalmon;
+  font-family: 'Google Sans';
+  background-color: #4285F4;
   float: left;
   height: 100%;
   line-height: 450px;
   padding: 10px;
   text-align: left;
   width: 40%;
+  color: white;
 }
 
 .containerTab {
-  background: green;
+  font-family: 'Google Sans';
+  background: #F4B400;
   color: white;
   display: none;
   float: center;
   padding: 20px;
-  width: 80%;
+  width: 60%;
 }
 
 #content {
@@ -50,14 +73,27 @@
   text-align: center;
 }
 
+.img-size {
+  width: 700px;
+}
+
+.inline {
+  display: inline-block;
+}
+
 /* Reset hyperlink format */
-.linkedin {
-  color: black;
+.link {
+  color: white;
   text-decoration: none;
 }
 
-.linkedin:hover {
+.link:hover {
   color: blue;
+}
+
+.me-size {
+  width: 403.2px;
+  height: 302.4px;
 }
 
 /* Next & previous buttons */
@@ -106,6 +142,10 @@
   cursor: pointer;
 }
 
+.resize {
+  width: 700px;
+}
+
 .row {
   float: center;
   height: 450px;
@@ -134,16 +174,6 @@ span {
   animation-duration: 1.5s;
 }
 
-@-webkit-keyframes slide {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes slide {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
 .slideshow-container {
   max-width: 700px;
   position: relative;
@@ -164,4 +194,9 @@ span {
   bottom: 8px;
   width: 100%;
   text-align: center;
+}
+
+.vid-size {
+  width: 700px;
+  height: 394px;
 }

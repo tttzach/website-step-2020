@@ -2,19 +2,20 @@
 <meta charset="UTF-8">
 <title>a terrible website</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
 <script src="script.js"></script>
 <!-- Two-column layout -->
 <div class="row">
   <div class="column-left">
     <h1>definitely not zachary's website.</h1>
-    <img src="images/me.jpg" alt="Picture of Zachary" width="403.2" height="302.4">
+    <img class="me-size" src="images/me.jpg" alt="Picture of Zachary">
   </div>
   <div class="column-right">
     <span>
     <p class="about-me" onclick="openTab('about-me');">about me
     <p class="technical" onclick="openTab('technical');">technical
     <p class="personal" onclick="openTab('personal');">personal
-    <p><a class="linkedin" href="https://www.linkedin.com/in/tttzach">linkedin</a>
+    <p><a class="link" href="https://www.linkedin.com/in/tttzach">linkedin</a>
     </span>
   </div>
 <!-- Expanding grid (hidden by default) -->
@@ -22,12 +23,19 @@
   <div id="about-me" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
     <h2>About Me</h2>
-    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major in Combinatorics & Optimization and a minor in Computer Science. Feel free to click on the other tabs for more not-so-exciting information about me.
+    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major in Combinatorics & Optimization and a minor in Computer Science. 
+    <p>Feel free to click on the other tabs for more not-so-exciting information about me.
+    <img class="img-size" src="images/meme.jpg" alt="Picture of Meme">
   </div>
   <div id="technical" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
     <h2>Technical</h2>
     <p>Over the last few years, I worked on a few pet projects and participated in hackathons.
+    <h2>Hack the North</h2>
+    <iframe class="vid-size" src="https://www.youtube.com/embed/vMdTO_IW4fY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h2>Waterloo Settlers of Catan</h2>
+    <img class="img-size" src="images/watan.jpg" alt="Picture of Watan">
+    <p>Go to <a class="link" href="https://www.github.com/tttzach">GitHub</a> for more!
   </div>
   <div id="personal" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
@@ -35,49 +43,50 @@
     <p>Here is a peek into my life during the University of Waterloo days.
     <div class="slideshow-container">
     <!-- Slideshow with slide number and caption text -->
-      <div class="slide" style="display:inline-block">
+    <!-- First slide overrides display in slide class -->
+      <div class="slide" style="display: inline-block">
         <div class="numbertext">1 / 9</div>
-        <img src="images/quebec.jpg" style="width:700px" alt="Picture at Quebec City">
+        <img class="img-size" src="images/quebec.jpg" alt="Picture at Quebec City">
         <div class="text">Christmas @ Quebec City '18</div>
       </div>
       <div class="slide">
         <div class="numbertext">2 / 9</div>
-        <img src="images/toronto.jpg" style="width:700px" alt="Picture at Toronto">
+        <img class="img-size" src="images/toronto.jpg" alt="Picture at Toronto">
         <div class="text">New Year's @ Toronto '19</div>
       </div>
       <div class="slide">
         <div class="numbertext">3 / 9</div>
-        <img src="images/ctt.jpg" style="width:700px" alt="Picture at Markham">
+        <img class="img-size" src="images/ctt.jpg" alt="Picture at Markham">
         <div class="text">Internship @ Markham '19</div>
       </div>
       <div class="slide">
         <div class="numbertext">4 / 9</div>
-        <img src="images/vaughan.jpg" style="width:700px" alt="Picture at Canada Wonderland">
+        <img class="img-size" src="images/vaughan.jpg" alt="Picture at Canada Wonderland">
         <div class="text">Canada Wonderland '19</div>
       </div>
       <div class="slide">
         <div class="numbertext">5 / 9</div>
-        <img src="images/chicago.jpg" style="width:700px" alt="Picture at Chicago">
+        <img class="img-size" src="images/chicago.jpg" alt="Picture at Chicago">
         <div class="text">Christmas @ Chicago '19</div>
       </div>
       <div class="slide">
         <div class="numbertext">6 / 9</div>
-        <img src="images/algonquin.jpg" style="width:700px" alt="Picture at Algonquin Provincial Park">
+        <img class="img-size" src="images/algonquin.jpg" alt="Picture at Algonquin Provincial Park">
         <div class="text">Algonquin Provincial Park '19</div>
       </div>
       <div class="slide">
         <div class="numbertext">7 / 9</div>
-        <img src="images/newyork.jpg" style="width:700px" alt="Picture at New York">
+        <img class="img-size" src="images/newyork.jpg" alt="Picture at New York">
         <div class="text">New Year's @ New York '20</div>
       </div>
       <div class="slide">
         <div class="numbertext">8 / 9</div>
-        <img src="images/bluemt.jpg" style="width:700px" alt="Picture at Blue Mountain">
+        <img class="img-size" src="images/bluemt.jpg" alt="Picture at Blue Mountain">
         <div class="text">Blue Mountain '20</div>
       </div>
       <div class="slide">
         <div class="numbertext">9 / 9</div>
-        <img src="images/grid.jpg" style="width:700px" alt="Picture at Stadia">
+        <img class="img-size" src="images/grid.jpg" alt="Picture at Stadia">
         <div class="text">GRID @ Stadia '20</div>
       </div>
       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
