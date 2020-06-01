@@ -22,7 +22,6 @@ function openTab(tabName) {
 }
 
 // Slideshow for Personal tab
-var slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
@@ -31,6 +30,7 @@ function plusSlides(offset) {
 }
 
 function showSlides(offset) {
+  var slideIndex = 1;
   var slides = document.getElementsByClassName("slide");
   if (offset > slides.length) {slideIndex = 1}
   if (offset < 1) {slideIndex = slides.length}
