@@ -59,7 +59,7 @@
 
 .containerTab {
   font-family: 'Google Sans';
-  background: #F4B400;
+  /* background: #F4B400; */
   color: white;
   display: none;
   float: center;
@@ -71,6 +71,10 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.green-fill {
+  background: #0F9D58;
 }
 
 .img-size {
@@ -142,6 +146,10 @@
   cursor: pointer;
 }
 
+.red-fill {
+  background: #DB4437;
+}
+
 .resize {
   width: 700px;
 }
@@ -199,4 +207,8 @@ span {
 .vid-size {
   width: 700px;
   height: 394px;
+}
+
+.yellow-fill {
+  background: #F4B400;
 }
