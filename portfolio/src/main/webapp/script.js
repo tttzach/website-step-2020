@@ -37,9 +37,10 @@ var plusSlides = (function (offset) {
   }
 })();
 
-// Fetches a hard-coded greeting from the server and adds it to the DOM
+// Fetches a hard-coded JSON string from the server and adds it as a greeting to the DOM
 async function getGreeting() {
   const response = await fetch('/data');
-  const greeting = await response.text();
+  const json = await response.json();
+  const greeting = "<h1>Hello " + json.podmates[0] + ", " + json.podmates[1] + " and " + json.podmates[2] + "!</h1>";
   document.getElementById('greeting-container').innerHTML = greeting;
 }
