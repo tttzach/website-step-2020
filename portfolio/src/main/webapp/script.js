@@ -20,3 +20,19 @@ function openTab(tabName) {
   }
   document.getElementById(tabName).style.display = "inline-block";
 }
+
+// Next/previous controls for slideshow under personal tab
+var plusSlides = (function (offset) {
+  var slideIndex = 1
+  return function(offset) {
+    slideIndex += offset;
+    var slides = document.getElementsByClassName("slide");
+    if (slideIndex > slides.length) {slideIndex = 1}
+    if (slideIndex < 1) {slideIndex = slides.length}
+    for (slide of slides) {
+      slide.style.display = "none";
+    }
+    slides[slideIndex-1].style.display = "block";
+    return slideIndex;
+  }
+})();
