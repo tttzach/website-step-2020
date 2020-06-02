@@ -36,10 +36,3 @@ var plusSlides = (function (offset) {
     return slideIndex;
   }
 })();
-
-// Fetches a hard-coded greeting from the server and adds it to the DOM
-async function getGreeting() {
-  const response = await fetch('/data');
-  const greeting = await response.text();
-  document.getElementById('greeting-container').innerHTML = greeting;
-}
