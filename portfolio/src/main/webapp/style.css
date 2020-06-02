@@ -80,18 +80,18 @@
   text-align: center;
 }
 
-.inline {
-  display: inline-block;
-}
-
 /* Reset hyperlink format */
-.link {
+.external-link {
   color: white;
   text-decoration: none;
 }
 
-.link:hover {
+.external-link:hover {
   color: blue;
+}
+
+.inline {
+  display: inline-block;
 }
 
 /* Next & previous buttons */
