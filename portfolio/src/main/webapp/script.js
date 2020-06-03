@@ -41,6 +41,24 @@ var plusSlides = (function (offset) {
 async function getGreeting() {
   const response = await fetch('/data');
   const json = await response.json();
-  const greeting = "<h1>Hello " + json.podmates[0] + ", " + json.podmates[1] + " and " + json.podmates[2] + "!</h1>";
+  const greeting = jsonToHtml(json);
   document.getElementById('greeting-container').innerHTML = greeting;
+}
+
+function jsonToHtml(podmates) {
+  html = "";
+  html += "<h1>Hello ";
+  currIndex = 0;
+  lastIndex = json.length - 1;
+  for (podmate of podmates) {
+    if (currIndex == lastIndex) {
+      html += " and ";
+    } else if (currIndex != 0) {
+      html += ", ";
+    }
+    html += podmate;
+    ++currIndex;
+  }
+  html += "!</h1>";
+  return html;
 }
