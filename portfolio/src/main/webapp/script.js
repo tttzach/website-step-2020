@@ -48,16 +48,14 @@ async function getGreeting() {
 function jsonToHtml(podmates) {
   html = "";
   html += "<h1>Hello ";
-  currIndex = 0;
-  lastIndex = json.length - 1;
-  for (podmate of podmates) {
-    if (currIndex == lastIndex) {
+  lastIndex = podmates.length - 1;
+  for (const [index, podmate] of podmates.entries()) {
+    if (index == lastIndex) {
       html += " and ";
-    } else if (currIndex != 0) {
+    } else if (index != 0) {
       html += ", ";
     }
     html += podmate;
-    ++currIndex;
   }
   html += "!</h1>";
   return html;
