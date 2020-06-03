@@ -14,7 +14,8 @@
 
 package com.google.sps.servlets;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +29,10 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // Create array list of podmates
-    ArrayList<String> podmates = new ArrayList<String>();
-    podmates.add("Austin");
-    podmates.add("Aymar");
-    podmates.add("Zachary");
+    // Create list of podmates
+    List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
 
-    // Convert the podmates array list to JSON
+    // Convert the podmates list to JSON
     String json = convertToJson(podmates);
 
     // Send the JSON as the response
