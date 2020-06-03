@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.List;
 import java.io.IOException;
@@ -26,33 +27,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  // Intercept on HTTP GET Requests
   @Override
-  public void doGetPodmates(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Create list of podmates
     List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
 
     // Convert the podmates list to JSON
-    String json = convertToJson(podmates);
+    String json = convertToJsonUsingGson(podmates);
 
     // Send the JSON as the response
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-  // Converts a podmates ArrayList into a JSON string using manual String concatenation.
-  private String convertToJson(ArrayList<String> podmates) {
-    boolean first = true;
-    String json = "{";
-    json += "\"podmates\": [";
-    for (String podmate : podmates) {
-      if (first) {
-        first = false;
-      } else {
-        json += ", ";
-      }
-      json += "\"" + podmate + "\"";
-    }
-    json += "]}";
+  // Converts a podmates List into a JSON string using the Gson library.
+  private String convertToJsonUsingGson(List<String> list) {
+    Gson gson = new Gson();
+    String json = gson.toJson(list);
     return json;
   }
 
