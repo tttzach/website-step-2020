@@ -46,8 +46,7 @@ async function getGreeting() {
 }
 
 function jsonToHtml(podmates) {
-  html = "";
-  html += "<h1>Hello ";
+  html = "<h1>Hello ";
   lastIndex = podmates.length - 1;
   for (const [index, podmate] of podmates.entries()) {
     if (index == lastIndex) {
