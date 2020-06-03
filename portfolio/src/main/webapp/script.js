@@ -14,8 +14,8 @@
 
 // Hide all elements with class="containerTab", except for the one that matches the clickable grid column
 function openTab(tabName) {
-  containerTabs = document.getElementsByClassName("containerTab");
-  for (containerTab of containerTabs) {
+  const containerTabs = document.getElementsByClassName("containerTab");
+  for (var containerTab of containerTabs) {
     containerTab.style.display = "none";
   }
   document.getElementById(tabName).style.display = "inline-block";
@@ -26,10 +26,10 @@ var plusSlides = (function (offset) {
   var slideIndex = 1
   return function(offset) {
     slideIndex += offset;
-    var slides = document.getElementsByClassName("slide");
+    const slides = document.getElementsByClassName("slide");
     if (slideIndex > slides.length) {slideIndex = 1}
     if (slideIndex < 1) {slideIndex = slides.length}
-    for (slide of slides) {
+    for (var slide of slides) {
       slide.style.display = "none";
     }
     slides[slideIndex-1].style.display = "block";
@@ -46,8 +46,8 @@ async function getGreeting() {
 }
 
 function jsonToHtml(podmates) {
-  html = "<h1>Hello ";
-  lastIndex = podmates.length - 1;
+  var html = "<h1>Hello ";
+  const lastIndex = podmates.length - 1;
   for (const [index, podmate] of podmates.entries()) {
     html += index == lastIndex ? " and "
             : index != 0 ? ", "
