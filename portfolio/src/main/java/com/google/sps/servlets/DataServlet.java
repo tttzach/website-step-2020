@@ -29,6 +29,8 @@ public class DataServlet extends HttpServlet {
 
   // Intercept on HTTP GET Requests
   @Override
+  // Intercept on HTTP GET Requests
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Create list of podmates
     List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
