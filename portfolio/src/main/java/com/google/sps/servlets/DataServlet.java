@@ -27,8 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+  public void doGetPodmates(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Create list of podmates
     List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
 
