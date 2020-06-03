@@ -49,11 +49,9 @@ function jsonToHtml(podmates) {
   html = "<h1>Hello ";
   lastIndex = podmates.length - 1;
   for (const [index, podmate] of podmates.entries()) {
-    if (index == lastIndex) {
-      html += " and ";
-    } else if (index != 0) {
-      html += ", ";
-    }
+    html += index == lastIndex ? " and "
+            : index != 0 ? ", "
+            : "";
     html += podmate;
   }
   html += "!</h1>";
