@@ -14,8 +14,8 @@
 
 // Hide all elements with class="containerTab", except for the one that matches the clickable grid column
 function openTab(tabName) {
-  containerTabs = document.getElementsByClassName("containerTab");
-  for (containerTab of containerTabs) {
+  const containerTabs = document.getElementsByClassName("containerTab");
+  for (var containerTab of containerTabs) {
     containerTab.style.display = "none";
   }
   document.getElementById(tabName).style.display = "inline-block";
@@ -26,10 +26,10 @@ var plusSlides = (function (offset) {
   var slideIndex = 1
   return function(offset) {
     slideIndex += offset;
-    var slides = document.getElementsByClassName("slide");
+    const slides = document.getElementsByClassName("slide");
     if (slideIndex > slides.length) {slideIndex = 1}
     if (slideIndex < 1) {slideIndex = slides.length}
-    for (slide of slides) {
+    for (var slide of slides) {
       slide.style.display = "none";
     }
     slides[slideIndex-1].style.display = "block";
@@ -37,9 +37,23 @@ var plusSlides = (function (offset) {
   }
 })();
 
-// Fetches a hard-coded greeting from the server and adds it to the DOM
+// Fetches a hard-coded JSON string from the server and adds it as a greeting to the DOM
 async function getGreeting() {
   const response = await fetch('/data');
-  const greeting = await response.text();
+  const json = await response.json();
+  const greeting = jsonToHtml(json);
   document.getElementById('greeting-container').innerHTML = greeting;
+}
+
+function jsonToHtml(podmates) {
+  var html = "<h1>Hello ";
+  const lastIndex = podmates.length - 1;
+  for (const [index, podmate] of podmates.entries()) {
+    html += index == lastIndex ? " and "
+            : index != 0 ? ", "
+            : "";
+    html += podmate;
+  }
+  html += "!</h1>";
+  return html;
 }
