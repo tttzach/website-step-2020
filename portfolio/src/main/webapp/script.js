@@ -60,9 +60,11 @@ function jsonToHtml(podmates) {
 
 // Fetches comments from the server and adds it to the DOM
 function getCommentForm() {
-  fetch('/comment-form').then(response => response.json()).then((comments) => {
-    document.getElementById('comment-container').innerHTML = comments;
-  });
+  fetch('/comment-form')
+    .then(response => response.json())
+    .then((comments) => {
+      document.getElementById('comment-container').innerHTML = comments;
+    });
 }
 
 // Fetches comments from the datastore and adds them to the DOM

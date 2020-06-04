@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comment-form")
 public final class CommentServlet extends HttpServlet {
 
-  private List<String> comments = new ArrayList<>();
+  private final List<String> comments = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
