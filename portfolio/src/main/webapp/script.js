@@ -58,9 +58,31 @@ function jsonToHtml(podmates) {
   return html;
 }
 
-// Fetches stored comments from the server and adds it to the DOM
+// Fetches comments from the server and adds it to the DOM
 function getCommentForm() {
   fetch('/comment-form').then(response => response.json()).then((comments) => {
     document.getElementById('comment-container').innerHTML = comments;
   });
+}
+
+// Fetches comments from the datastore and adds them to the DOM
+function loadComments() {
+  fetch('/list-comments').then(response => response.json()).then((comments) => {
+    const commentListElement = document.getElementById('comments-list');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCommentElement(comment));
+    })
+  });
+}
+
+// Creates an element that represents a comment
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const textElement = document.createElement('span');
+  textElement.innerText = comment;
+
+  commentElement.appendChild(textElement);
+  return commentElement;
 }
