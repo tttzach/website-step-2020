@@ -57,3 +57,10 @@ function jsonToHtml(podmates) {
   html += "!</h1>";
   return html;
 }
+
+// Fetches stored comments from the server and adds it to the DOM
+function getCommentForm() {
+  fetch('/comment-form').then(response => response.json()).then((comments) => {
+    document.getElementById('comment-container').innerHTML = comments;
+  });
+}

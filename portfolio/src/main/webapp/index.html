@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
 <script src="script.js"></script>
-<body onload="getGreeting()">
+<body onload="getGreeting(); getCommentForm();">
 <!-- Two-column layout -->
 <div class="row">
   <div class="column-left">
@@ -19,6 +19,14 @@
     <p class="technical" onclick="openTab('technical');">technical
     <p class="personal" onclick="openTab('personal');">personal
     <p><a class="external-link" href="https://www.linkedin.com/in/tttzach">linkedin</a>
+    <form action="/comment-form" method="POST">
+    <p>Type a comment here:</p>
+    <input type="text" name="comment">
+    <br/><br/>
+    <input type="submit"/>
+    </form>
+    <br/><br/>
+    <div id="comment-container"></div>
     </span>
   </div>
 <!-- Expanding grid (hidden by default) -->
