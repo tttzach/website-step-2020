@@ -33,7 +33,7 @@ public final class CommentServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     response.setContentType("application/json");
-    String json = new Gson().toJson(comments);
+    final String json = new Gson().toJson(comments);
     response.getWriter().println(json);
 
   }
@@ -41,7 +41,7 @@ public final class CommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form
-    String comment = getComment(request);
+    final String comment = getComment(request);
     // Add comment to comments data structure
     comments.add(comment);
     // Redirect back to the HTML page
@@ -51,7 +51,7 @@ public final class CommentServlet extends HttpServlet {
   // Returns the comment entered by client
   private String getComment(HttpServletRequest request) {
     // Get the input from the form
-    String comment = request.getParameter("comment");
+    final String comment = request.getParameter("comment");
     return comment;
   }
 

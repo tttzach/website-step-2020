@@ -31,10 +31,10 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Create list of podmates
-    List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
+    final List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
 
     // Convert the podmates list to JSON
-    String json = convertToJsonUsingGson(podmates);
+    final String json = convertToJsonUsingGson(podmates);
 
     // Send the JSON as the response
     response.setContentType("application/json;");
@@ -43,8 +43,8 @@ public class DataServlet extends HttpServlet {
 
   // Converts a podmates List into a JSON string using the Gson library.
   private String convertToJsonUsingGson(List<String> list) {
-    Gson gson = new Gson();
-    String json = gson.toJson(list);
+    final Gson gson = new Gson();
+    final String json = gson.toJson(list);
     return json;
   }
 

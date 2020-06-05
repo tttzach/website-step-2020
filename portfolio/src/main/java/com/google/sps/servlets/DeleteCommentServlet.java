@@ -34,12 +34,12 @@ public class DeleteCommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    final Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    final PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-      Key entityKey = entity.getKey();
+      final Key entityKey = entity.getKey();
       datastore.delete(entityKey);
     }
 

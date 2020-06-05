@@ -65,6 +65,15 @@
   color: white;
 }
 
+#comments {
+  background: #F4B400;
+}
+
+.comments:hover {
+  color: gold;
+  cursor: pointer;
+}
+
 .containerTab {
   font-family: 'Google Sans';
   color: white;
