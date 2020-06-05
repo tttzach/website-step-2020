@@ -40,6 +40,7 @@ public class ListCommentsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
+    // queryString = "max=2";
     String queryString = request.getQueryString();
     String maxString = queryString.split("=")[1];
     int max = Integer.parseInt(maxString);
