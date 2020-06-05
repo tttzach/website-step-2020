@@ -40,10 +40,19 @@ public class ListCommentsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
+    String queryString = request.getQueryString();
+    String maxString = queryString.split("=")[1];
+    int max = Integer.parseInt(maxString);
+    int index = 0;
+
     List<String> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
+      if (index == max) {
+        break;
+      }
       String comment = (String) entity.getProperty("comment");
       comments.add(comment);
+      ++index;
     }
 
     Gson gson = new Gson();

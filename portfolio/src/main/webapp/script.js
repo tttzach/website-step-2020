@@ -69,9 +69,11 @@ function getCommentForm() {
 
 // Fetches comments from the datastore and adds them to the DOM
 function loadComments() {
-  fetch('/list-comments').then(response => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comments-list');
-    comments.forEach((comment) => {
+  fetch('/list-comments?max=2')
+    .then(response => response.json())
+    .then((comments) => {
+      const commentListElement = document.getElementById('comments-list');
+      comments.forEach((comment) => {
       commentListElement.appendChild(createCommentElement(comment));
     })
   });
