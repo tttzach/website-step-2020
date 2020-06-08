@@ -93,16 +93,57 @@ function createCommentElement(comment) {
   return commentElement;
 }
 
-// Creates a map and adds it to the page
+// Creates a terrain map with a marker and adds it to the page
 function createMap() {
+  const uWaterloo = {lat: 43.473, lng: -80.545};
+  const map = mapInit(uWaterloo);
+  const marker = createMapMarker(map, uWaterloo);
+  changeMapToTerrain(map);
+  createMapInfoWindow(map, marker);
+}
+
+function mapInit(position) {
   const map = new google.maps.Map(
-    document.getElementById('map'),
-    {center: {lat: 43.473, lng: -80.545}, zoom: 16}
-  );
-  var marker = new google.maps.Marker(
-    {
-    position: new google.maps.LatLng(43.473, -80.545),
-    map: map,
+    document.getElementById('map'), {
+      center: position,
+      zoom: 16
     }
   );
+  return map;
+}
+
+function createMapMarker(map, position) {
+  const marker = new google.maps.Marker({
+    map: map,
+    position: position
+  });
+  return marker;
+}
+
+function changeMapToTerrain(map) {
+  map.setMapTypeId('terrain');
+}
+
+function createMapInfoWindow(map, marker) {
+  const contentString = '<div id="infowindow">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">University of Waterloo</h1>'+
+        '<div id="bodyContent">'+
+        '<p>The <b>University of Waterloo</b> (commonly referred to as <b>Waterloo</b>, <b>UW</b>, or '+
+        '<b>UWaterloo</b>) is a public research university with a main campus in Waterloo, Ontario, '+
+        'Canada. The main campus is on 404 hectares of land adjacent to Uptown Waterloo and Waterloo '+
+        'Park. The university also operates three satellite campuses and four affiliated university '+
+        'colleges.</p>'+
+        '<p>Attribution: University of Waterloo, <a href="https://en.wikipedia.org/wiki/University_of_Waterloo">'+
+        'https://en.wikipedia.org/wiki/University_of_Waterloo</a> '+
+        '(last visited June 8, 2020).</p>'+
+        '</div>'+
+        '</div>';
+  const infoWindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
 }

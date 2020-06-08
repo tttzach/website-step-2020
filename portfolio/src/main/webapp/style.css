@@ -99,6 +99,13 @@
   color: blue;
 }
 
+#infowindow {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  color: black;
+}
+
 .inline {
   display: inline-block;
 }
@@ -138,7 +145,7 @@
 #map {
   border: thin solid black;
   height: 500px;
-  width: 500px;
+  width: 700px;
   display: inline-block;
 }
 
