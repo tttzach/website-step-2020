@@ -29,14 +29,14 @@ public class NewCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    final String comment = request.getParameter("comment");
-    final long timestamp = System.currentTimeMillis();
+    String comment = request.getParameter("comment");
+    long timestamp = System.currentTimeMillis();
 
-    final Entity commentEntity = new Entity("Comment");
+    Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment", comment);
     commentEntity.setProperty("timestamp", timestamp);
 
-    final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     response.sendRedirect("/index.html");

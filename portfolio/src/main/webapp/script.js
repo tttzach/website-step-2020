@@ -76,9 +76,9 @@ function loadComments(maxInt) {
       const commentListElement = document.getElementById('comments-list');
       commentListElement.innerHTML = "";
       comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment));
-    })
-  });
+        commentListElement.appendChild(createCommentElement(comment));
+      })
+    });
 }
 
 // Creates an element that represents a comment

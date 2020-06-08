@@ -35,29 +35,29 @@ public class ListCommentsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    final Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
-    final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    final PreparedQuery results = datastore.prepare(query);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
 
-    // queryString = "max=2";
-    final String queryString = request.getQueryString();
-    final String maxString = queryString.split("=")[1];
-    final int max = Integer.parseInt(maxString);
+    // queryString = "max=...";
+    String queryString = request.getQueryString();
+    String maxString = queryString.split("=")[1];
+    int max = Integer.parseInt(maxString);
     int index = 0;
 
     List<String> comments = new ArrayList<>();
+
     for (Entity entity : results.asIterable()) {
       if (index == max) {
         break;
       }
-      final String comment = (String) entity.getProperty("comment");
+      String comment = (String) entity.getProperty("comment");
       comments.add(comment);
       ++index;
     }
 
-    final Gson gson = new Gson();
-
+    Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
   }
