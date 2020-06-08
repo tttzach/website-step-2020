@@ -4,8 +4,9 @@
 <link rel="favicon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcZGCU3AsjgfDepEB6yjW70pkW6KWohZo"></script>
 <script src="script.js"></script>
-<body onload="getGreeting()">
+<body onload="getGreeting(); createMap();">
 <!-- Two-column layout -->
 <div class="row">
   <div class="column-left">
@@ -41,7 +42,12 @@
   <div id="about-me" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
     <h2>About Me</h2>
-    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major in Combinatorics & Optimization and a minor in Computer Science.<br/>Feel free to click on the other tabs for more not-so-exciting information about me.
+    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major
+      in Combinatorics & Optimization and a minor in Computer Science.<br/>Feel free to click on the other
+      tabs for more not-so-exciting information about me.
+    <br/><br/>
+    <div id="map"></div>
+    <br/><br/>
     <p><img class="about-me-img" src="images/meme.jpg" alt="Picture of Meme">
   </div>
   <div id="technical" class="containerTab">

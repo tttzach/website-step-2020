@@ -135,6 +135,13 @@
   border-radius: 0 3px 3px 0;
 }
 
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+  display: inline-block;
+}
+
 /* Number text (1/3 etc) */
 .numbertext {
   color: #f2f2f2;
