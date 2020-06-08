@@ -33,14 +33,22 @@ public class DeleteCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    PreparedQuery results = prepareQuery(datastore);
+    deleteAll(datastore, results);
+    response.sendRedirect("/index.html");
+  }
+
+  private PreparedQuery prepareQuery(DatastoreService datastore) {
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    return datastore.prepare(query);
+  }
+
+  private void deleteAll(DatastoreService datastore, PreparedQuery results) {
     for (Entity entity : results.asIterable()) {
       Key entityKey = entity.getKey();
       datastore.delete(entityKey);
     }
-    response.sendRedirect("/index.html");
   }
 
 }

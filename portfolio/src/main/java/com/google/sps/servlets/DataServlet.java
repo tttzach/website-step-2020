@@ -32,10 +32,8 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Create list of podmates
     List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
-
     // Convert the podmates list to JSON
     String json = convertToJsonUsingGson(podmates);
-
     // Send the JSON as the response
     response.setContentType("application/json;");
     response.getWriter().println(json);

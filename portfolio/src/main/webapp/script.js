@@ -72,13 +72,13 @@ function loadComments(maxInt) {
   const max = maxInt.toString();
   fetch('/list-comments?max=' + max)
     .then(response => response.json())
-    .then((comments) => {
+    .then(comments => {
       const commentListElement = document.getElementById('comments-list');
       commentListElement.innerHTML = "";
-      comments.forEach((comment) => {
+      comments.forEach(comment => {
         commentListElement.appendChild(createCommentElement(comment));
-      })
-    });
+    })
+  });
 }
 
 // Creates an element that represents a comment
