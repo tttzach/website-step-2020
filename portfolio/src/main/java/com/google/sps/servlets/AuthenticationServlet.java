@@ -39,7 +39,9 @@ public class AuthenticationServlet extends HttpServlet {
       response.getWriter().println("<p>Hello " + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
       */
-      response.getWriter().println("<p>User is logged in");
+          // Create list of podmates
+      
+      response.getWriter().println("true");
     } else {
       /*
       String urlToRedirectToAfterUserLogsIn = "/";
@@ -48,7 +50,7 @@ public class AuthenticationServlet extends HttpServlet {
       response.getWriter().println("<p>Hello stranger.</p>");
       response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
       */
-      response.getWriter().println("<p>User is not logged in");
+      response.getWriter().println("false");
     }
   }
 }

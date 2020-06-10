@@ -69,6 +69,12 @@ function getCommentForm() {
 
 // Fetches comments from the datastore and adds them to the DOM
 function loadComments(maxInt) {
+  /*
+  fetch('/authentication')
+    .then(response => (response.text() == 'true'))
+    .then(loggedIn => {
+
+    })*/
   const max = maxInt.toString();
   fetch('/list-comments?max=' + max)
     .then(response => response.json())

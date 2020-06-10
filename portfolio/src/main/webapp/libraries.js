@@ -139,6 +139,11 @@ function drawCoronavirusChart() {
 
 async function getLoginStatus() {
   const response = await fetch('/authentication');
-  const loginStatus = await response.text();
-  document.getElementById('login-status').innerHTML = loginStatus;
+  const responseText = await response.text();
+  const loggedIn = (responseText == 'true');
+  if (loggedIn) {
+    document.getElementById('login-status').innerHTML = "<p> You are logged in.";
+  } else {
+    document.getElementById('login-status').innerHTML = "<p> You are not logged in.";
+  }
 }
