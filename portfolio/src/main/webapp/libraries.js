@@ -43,21 +43,21 @@ function changeMapToTerrain(map) {
 }
 
 function createMapInfoWindow(map, marker) {
-  const contentString = '<div id="infowindow">' +
-    '<div id="siteNotice">' +
-    '</div>' +
-    '<h1 id="firstHeading" class="firstHeading">University of Waterloo</h1>' +
-    '<div id="bodyContent">' +
-    '<p>The <b>University of Waterloo</b> (commonly referred to as <b>Waterloo</b>, <b>UW</b>, or ' +
-    '<b>UWaterloo</b>) is a public research university with a main campus in Waterloo, Ontario, ' +
-    'Canada. The main campus is on 404 hectares of land adjacent to Uptown Waterloo and Waterloo ' +
-    'Park. The university also operates three satellite campuses and four affiliated university ' +
-    'colleges.</p>' +
-    '<p>Attribution: University of Waterloo, <a href="https://en.wikipedia.org/wiki/University_of_Waterloo">' +
-    'https://en.wikipedia.org/wiki/University_of_Waterloo</a> ' +
-    '(last visited June 8, 2020).</p>' +
-    '</div>' +
-    '</div>';
+  const contentString = `<div id="infowindow">
+    <div id="siteNotice"></div>
+      <h1 id="firstHeading" class="firstHeading">University of Waterloo</h1>
+      <div id="bodyContent">
+        <p>The <b>University of Waterloo</b> (commonly referred to as <b>Waterloo</b>, <b>UW</b>, or 
+        <b>UWaterloo</b>) is a public research university with a main campus in Waterloo, Ontario, 
+        Canada. The main campus is on 404 hectares of land adjacent to Uptown Waterloo and Waterloo 
+        Park. The university also operates three satellite campuses and four affiliated university 
+        colleges.
+        <p>Attribution: University of Waterloo, 
+        <a href="https://en.wikipedia.org/wiki/University_of_Waterloo">
+        https://en.wikipedia.org/wiki/University_of_Waterloo</a> 
+        (last visited June 8, 2020).
+      </div>
+  </div>`;
   const infoWindow = new google.maps.InfoWindow({
     content: contentString
   });
