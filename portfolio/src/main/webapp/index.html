@@ -9,7 +9,7 @@
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="script.js"></script>
 <script src="libraries.js"></script>
-<body onload="getGreeting(); createMap();">
+<body onload="getGreeting(); createMap(); getLoginStatus();">
 <!-- Two-column layout -->
 <div class="row">
   <div class="column-left">
@@ -19,6 +19,7 @@
   <div class="column-right">
     <span>
     <div id="greeting-container"></div>
+    <div id="login-status"></div>
     <p class="about-me" onclick="openTab('about-me');">about me
     <p class="technical" onclick="openTab('technical');">technical
     <p class="personal" onclick="openTab('personal');">personal

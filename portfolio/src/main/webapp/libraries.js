@@ -136,3 +136,9 @@ function drawCoronavirusChart() {
       chart.draw(data, options);
     });
 }
+
+async function getLoginStatus() {
+  const response = await fetch('/authentication');
+  const loginStatus = await response.text();
+  document.getElementById('login-status').innerHTML = loginStatus;
+}
