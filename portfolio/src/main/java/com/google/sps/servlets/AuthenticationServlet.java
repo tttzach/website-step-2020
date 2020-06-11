@@ -13,7 +13,8 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
-
+import com.google.gson.Gson;
+import org.javatuples.Pair;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -27,16 +28,25 @@ public class AuthenticationServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html");
+    response.setContentType("application/json");
     UserService userService = UserServiceFactory.getUserService();
     String redirectUrl = "/index.html";
     if (userService.isUserLoggedIn()) {
+      String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(redirectUrl);
-      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.");
+      Pair<String, String> userInfo = new Pair<>(userEmail, logoutUrl);
+      sendJson(response, userInfo);
     } else {
       String loginUrl = userService.createLoginURL(redirectUrl);
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.");
+      Pair<String, String> userInfo = new Pair<>("N/A", loginUrl);
+      sendJson(response, userInfo);
     }
+  }
+
+  private void sendJson(HttpServletResponse response, Pair<String, String> userInfo) throws IOException {
+    Gson gson = new Gson();
+    String json = gson.toJson(userInfo);
+    response.getWriter().println(json);
   }
   
 }
