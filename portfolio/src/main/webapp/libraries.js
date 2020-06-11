@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawPieChart);
+google.charts.setOnLoadCallback(drawRegionsChart);
+google.charts.setOnLoadCallback(drawCoronavirusChart);
+
 function createMap() {
   const uWaterloo = { lat: 43.473, lng: -80.545 };
   const map = mapInit(uWaterloo);
@@ -66,11 +71,6 @@ function createMapInfoWindow(map, marker) {
   });
 }
 
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawPieChart);
-google.charts.setOnLoadCallback(drawRegionsChart);
-google.charts.setOnLoadCallback(drawCoronavirusChart);
-
 function drawPieChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Animal');
@@ -113,7 +113,8 @@ function drawRegionsChart() {
 }
 
 function drawCoronavirusChart() {
-  fetch('/coronavirus-data').then(response => response.json())
+  fetch('/coronavirus-data')
+    .then(response => response.json())
     .then((coronavirusCases) => {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Country');
