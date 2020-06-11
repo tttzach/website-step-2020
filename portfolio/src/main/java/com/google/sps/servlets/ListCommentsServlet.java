@@ -60,8 +60,9 @@ public class ListCommentsServlet extends HttpServlet {
     Iterator<Entity> iterator = results.asIterator();
     for (int i = 0; (i < max) && (iterator.hasNext()); ++i) {
       Entity entity = iterator.next();
+      String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
-      comments.add(comment);
+      comments.add(email + ": " + comment);
     }
     return comments;
   }
