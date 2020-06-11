@@ -19,7 +19,6 @@
   <div class="column-right">
     <span>
     <div id="greeting-container"></div>
-    <div id="login-status"></div>
     <p class="about-me" onclick="openTab('about-me');">about me
     <p class="technical" onclick="openTab('technical');">technical
     <p class="personal" onclick="openTab('personal');">personal
@@ -31,6 +30,7 @@
 <div class="row">
   <div id="comments" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+    <div id="login-status"></div>
     <div id="comments-form">
       <form action="/new-comment" method="POST">
       <p>Type a comment here: <input type="text" name="comment"><input type="submit"/>

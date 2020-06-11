@@ -28,29 +28,15 @@ public class AuthenticationServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
-
     UserService userService = UserServiceFactory.getUserService();
+    String redirectUrl = "/index.html";
     if (userService.isUserLoggedIn()) {
-      /*
-      String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
-      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
-      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-      */
-          // Create list of podmates
-      
-      response.getWriter().println("true");
+      String logoutUrl = userService.createLogoutURL(redirectUrl);
+      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.");
     } else {
-      /*
-      String urlToRedirectToAfterUserLogsIn = "/";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-
-      response.getWriter().println("<p>Hello stranger.</p>");
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
-      */
-      response.getWriter().println("false");
+      String loginUrl = userService.createLoginURL(redirectUrl);
+      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.");
     }
   }
+  
 }
