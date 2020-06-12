@@ -26,8 +26,8 @@ const DEFAULT_WIDTH = 700;
 const DEFAULT_HEIGHT = 500;
 
 function createMap() {
-  const map = mapInit(uWaterloo);
-  const marker = createMapMarker(map, uWaterloo);
+  const map = mapInit(UWATERLOO);
+  const marker = createMapMarker(map, UWATERLOO);
   changeMapToTerrain(map);
   createMapInfoWindow(map, marker);
 }
@@ -36,7 +36,7 @@ function mapInit(position) {
   const map = new google.maps.Map(
     document.getElementById('map'), {
     center: position,
-    zoom: zoom
+    zoom: ZOOM
   });
   return map;
 }
@@ -89,8 +89,8 @@ function drawPieChart() {
 
   const options = {
     'title': 'Zoo Animals',
-    'width': defaultWidth,
-    'height': defaultHeight
+    'width': DEFAULT_WIDTH,
+    'height': DEFAULT_HEIGHT
   };
 
   const chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
@@ -110,8 +110,8 @@ function drawRegionsChart() {
 
   const options = {
     'title': 'Sample Regions Chart',
-    'width': defaultWidth,
-    'height': defaultHeight
+    'width': DEFAULT_WIDTH,
+    'height': DEFAULT_HEIGHT
   };
 
   const chart = new google.visualization.GeoChart(document.getElementById('regions-chart'));
@@ -131,8 +131,8 @@ function drawCoronavirusChart() {
 
       const options = {
         'title': 'Coronavirus Cases',
-        'width': defaultWidth,
-        'height': defaultHeight,
+        'width': DEFAULT_WIDTH,
+        'height': DEFAULT_HEIGHT,
         'colorAxis': { colors: ['lightcoral', 'darkred'] },
         'backgroundColor': 'lightblue',
         'datalessRegionColor': 'white',
