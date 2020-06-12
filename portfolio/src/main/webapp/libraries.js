@@ -12,8 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawPieChart);
+google.charts.setOnLoadCallback(drawRegionsChart);
+google.charts.setOnLoadCallback(drawCoronavirusChart);
+
+// Coordinates of the University of Waterloo from manually checking Google Maps
+const UWATERLOO = { lat: 43.473, lng: -80.545 };
+// Show all the main buildings of the University of Waterloo
+const ZOOM = 16;
+// Match height and width to other visual elements on the About Me tab
+const DEFAULT_WIDTH = 700;
+const DEFAULT_HEIGHT = 500;
+
 function createMap() {
-  const uWaterloo = { lat: 43.473, lng: -80.545 };
   const map = mapInit(uWaterloo);
   const marker = createMapMarker(map, uWaterloo);
   changeMapToTerrain(map);
@@ -24,9 +36,8 @@ function mapInit(position) {
   const map = new google.maps.Map(
     document.getElementById('map'), {
     center: position,
-    zoom: 16
-  }
-  );
+    zoom: zoom
+  });
   return map;
 }
 
@@ -66,11 +77,6 @@ function createMapInfoWindow(map, marker) {
   });
 }
 
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawPieChart);
-google.charts.setOnLoadCallback(drawRegionsChart);
-google.charts.setOnLoadCallback(drawCoronavirusChart);
-
 function drawPieChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Animal');
@@ -83,8 +89,8 @@ function drawPieChart() {
 
   const options = {
     'title': 'Zoo Animals',
-    'width': 700,
-    'height': 500
+    'width': defaultWidth,
+    'height': defaultHeight
   };
 
   const chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
@@ -104,8 +110,8 @@ function drawRegionsChart() {
 
   const options = {
     'title': 'Sample Regions Chart',
-    'width': 700,
-    'height': 500
+    'width': defaultWidth,
+    'height': defaultHeight
   };
 
   const chart = new google.visualization.GeoChart(document.getElementById('regions-chart'));
@@ -113,7 +119,8 @@ function drawRegionsChart() {
 }
 
 function drawCoronavirusChart() {
-  fetch('/coronavirus-data').then(response => response.json())
+  fetch('/coronavirus-data')
+    .then(response => response.json())
     .then((coronavirusCases) => {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Country');
@@ -124,8 +131,8 @@ function drawCoronavirusChart() {
 
       const options = {
         'title': 'Coronavirus Cases',
-        'width': 700,
-        'height': 500,
+        'width': defaultWidth,
+        'height': defaultHeight,
         'colorAxis': { colors: ['lightcoral', 'darkred'] },
         'backgroundColor': 'lightblue',
         'datalessRegionColor': 'white',
