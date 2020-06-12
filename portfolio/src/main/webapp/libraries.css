@@ -1,6 +1,7 @@
 #coronavirus-chart {
   border: thin solid black;
   display: inline-block;
+  margin: 20px;
 }
 
 #map {
@@ -8,16 +9,19 @@
   height: 500px;
   width: 700px;
   display: inline-block;
+  margin: 20px;
 }
 
 #pie-chart {
   border: thin solid black;
   display: inline-block;
+  margin: 20px;
 }
 
 #regions-chart {
   border: thin solid black;
   display: inline-block;
+  margin: 20px;
 }
 
 #comments-form {
