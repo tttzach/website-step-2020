@@ -17,8 +17,15 @@ google.charts.setOnLoadCallback(drawPieChart);
 google.charts.setOnLoadCallback(drawRegionsChart);
 google.charts.setOnLoadCallback(drawCoronavirusChart);
 
+// Coordinates of the University of Waterloo from manually checking Google Maps
+const uWaterloo = { lat: 43.473, lng: -80.545 };
+// Show all the main buildings of the University of Waterloo
+const zoom = 16;
+// Match height and width to other visual elements on the About Me tab
+const defaultWidth = 700;
+const defaultHeight = 500;
+
 function createMap() {
-  const uWaterloo = { lat: 43.473, lng: -80.545 };
   const map = mapInit(uWaterloo);
   const marker = createMapMarker(map, uWaterloo);
   changeMapToTerrain(map);
@@ -29,7 +36,7 @@ function mapInit(position) {
   const map = new google.maps.Map(
     document.getElementById('map'), {
     center: position,
-    zoom: 16
+    zoom: zoom
   }
   );
   return map;
@@ -83,8 +90,8 @@ function drawPieChart() {
 
   const options = {
     'title': 'Zoo Animals',
-    'width': 700,
-    'height': 500
+    'width': defaultWidth,
+    'height': defaultHeight
   };
 
   const chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
@@ -104,8 +111,8 @@ function drawRegionsChart() {
 
   const options = {
     'title': 'Sample Regions Chart',
-    'width': 700,
-    'height': 500
+    'width': defaultWidth,
+    'height': defaultHeight
   };
 
   const chart = new google.visualization.GeoChart(document.getElementById('regions-chart'));
@@ -125,8 +132,8 @@ function drawCoronavirusChart() {
 
       const options = {
         'title': 'Coronavirus Cases',
-        'width': 700,
-        'height': 500,
+        'width': defaultWidth,
+        'height': defaultHeight,
         'colorAxis': { colors: ['lightcoral', 'darkred'] },
         'backgroundColor': 'lightblue',
         'datalessRegionColor': 'white',
