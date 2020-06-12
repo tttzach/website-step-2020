@@ -1,0 +1,12 @@
+#comments {
+  background: #F4B400;
+}
+
+.comments:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+#comments-list {
+  margin: 20px;
+}

@@ -1,0 +1,57 @@
+#about-me {
+  background: #DB4437;
+}
+
+.about-me:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.about-me-img {
+  width: var(--width);
+}
+
+/* Closable button inside the containerTab */
+.closebtn {
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 35px;
+}
+
+/* Reset hyperlink format */
+.external-link {
+  color: white;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  color: blue;
+}
+
+#personal {
+  background: #F4B400;
+}
+
+.personal:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+#technical {
+  background: #0F9D58;
+}
+
+.technical:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.technical-img {
+  width: var(--width);
+}
+
+.technical-vid {
+  width: 700px;
+  height: 394px;
+}

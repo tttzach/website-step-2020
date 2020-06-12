@@ -12,6 +12,14 @@
   margin: 20px;
 }
 
+#infowindow {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  color: black;
+}
+
+
 #pie-chart {
   border: thin solid black;
   display: inline-block;
@@ -22,6 +30,7 @@
   border: thin solid black;
   display: inline-block;
   margin: 20px;
+  align: center;
 }
 
 #comments-form {

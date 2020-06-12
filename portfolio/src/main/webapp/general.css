@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Google Sans Regular'), local('GoogleSans-Regular'), url(https://fonts.gstatic.com/s/googlesans/v16/4UaGrENHsxJlGDuGo1OIlL3Kwp5MKg.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column-left {
+  font-family: 'Google Sans';
+  background-color: #4285F4;
+  float: left;
+  height: 100%;
+  padding: 10px;
+  text-align: right;
+  width: 60%;
+  color: white;
+}
+
+.column-right {
+  font-family: 'Google Sans';
+  background-color: #4285F4;
+  float: left;
+  height: 100%;
+  line-height: 450px;
+  padding: 10px;
+  text-align: left;
+  width: 40%;
+  color: white;
+}
+
+.containerTab {
+  font-family: 'Google Sans';
+  color: white;
+  display: none;
+  float: center;
+  padding: 20px;
+  width: 100%;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.inline {
+  display: inline-block;
+}
+
+/* Store default img width */
+:root {
+  --width: 700px;
+}
+
+.row {
+  float: center;
+  height: 450px;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+span {
+  display: inline-block;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+#top-image {
+  width: 403.2px;
+  height: 302.4px;
+}
