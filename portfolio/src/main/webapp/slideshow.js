@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Next/previous controls for slideshow under personal tab
-var plusSlides = (function (offset) {
+var plusSlides = (function () {
   var slideIndex = 1
   return function(offset) {
     slideIndex += offset;
