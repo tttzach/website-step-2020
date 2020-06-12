@@ -18,12 +18,12 @@ google.charts.setOnLoadCallback(drawRegionsChart);
 google.charts.setOnLoadCallback(drawCoronavirusChart);
 
 // Coordinates of the University of Waterloo from manually checking Google Maps
-const uWaterloo = { lat: 43.473, lng: -80.545 };
+const UWATERLOO = { lat: 43.473, lng: -80.545 };
 // Show all the main buildings of the University of Waterloo
-const zoom = 16;
+const ZOOM = 16;
 // Match height and width to other visual elements on the About Me tab
-const defaultWidth = 700;
-const defaultHeight = 500;
+const DEFAULT_WIDTH = 700;
+const DEFAULT_HEIGHT = 500;
 
 function createMap() {
   const map = mapInit(uWaterloo);
@@ -37,8 +37,7 @@ function mapInit(position) {
     document.getElementById('map'), {
     center: position,
     zoom: zoom
-  }
-  );
+  });
   return map;
 }
 
