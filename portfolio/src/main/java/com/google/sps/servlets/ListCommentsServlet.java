@@ -76,7 +76,7 @@ public class ListCommentsServlet extends HttpServlet {
     for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
-      String translatedComment = translateText(comment, language);
+      String translatedComment = getTranslation(comment, language);
       comments.add(email + ": " + translatedComment);
     }
     return comments;
@@ -88,7 +88,7 @@ public class ListCommentsServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(comments));
   }
 
-  private String translateText(String originalText, String languageCode) {
+  private String getTranslation(String originalText, String languageCode) {
     Translate translate = TranslateOptions.getDefaultInstance().getService();
     Translation translation = translate.translate(
       originalText, 
