@@ -26,7 +26,6 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
