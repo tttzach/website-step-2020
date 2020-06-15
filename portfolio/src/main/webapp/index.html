@@ -41,15 +41,18 @@
       <form action="/new-comment" method="POST">
       <p>Type a comment here: <input type="text" name="comment"><input type="submit"/>
       </form>
-      <p>Load how many comments: <input type="int" id="max" name="max" value="1" onchange="loadComments(this.value, language.value)">
-      <div id="comments-list"></div>
-      <select id="language" onchange="loadComments(max.value, this.value)">
-        <option value="es">English</option>
+      <form method="POST" onsubmit="return loadComments(max.value, language.value)">
+      <p>Load how many comments: <input type="int" id="max" name="max" required>
+      <select id="language" name="language" required>
+        <option value="es" selected>English</option>
         <option value="zh">Chinese</option>
         <option value="es">Spanish</option>
         <option value="hi">Hindi</option>
         <option value="ar">Arabic</option>
       </select>
+      <input type="submit" name="display" value="Display" />
+      </form>
+      <div id="comments-list"></div>
       <form action="/delete-comment" method="POST">
         <input type="submit" name="delete" value="Delete" />
       </form>

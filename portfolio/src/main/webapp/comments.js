@@ -33,6 +33,7 @@ function loadComments(maxInt, language) {
         commentListElement.appendChild(createCommentElement(comment));
     })
   });
+  return false;
 }
 
 // Creates an element that represents a comment
