@@ -42,7 +42,7 @@ public class ListCommentsServlet extends HttpServlet {
     PreparedQuery results = prepareQuery();
     int max = getMax(request);
     String language = getLanguage(request);
-    List<String> comments = getCommentsToDisplay(results, max, language);
+    List<String> comments = getCommentsToDisplay(results, max, language, response);
     sendJson(response, comments);
   }
 
@@ -69,14 +69,14 @@ public class ListCommentsServlet extends HttpServlet {
     return languageString.split("=")[1];
   }
 
-  private List<String> getCommentsToDisplay(PreparedQuery results, int max, String language) {
+  private List<String> getCommentsToDisplay(PreparedQuery results, int max, String language,  HttpServletResponse response) {
     List<String> comments = new ArrayList<>();
     List<Entity> entities = results.asList(FetchOptions.Builder.withLimit(max));
     for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
       String score = (String) entity.getProperty("score");
-      String translatedComment = getTranslation(comment, language);
+      String translatedComment = getTranslation(comment, language, response);
       comments.add(email + ": " + translatedComment + " (" + score + ")");
     }
     return comments;
@@ -88,12 +88,14 @@ public class ListCommentsServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(comments));
   }
 
-  private String getTranslation(String originalText, String languageCode) {
+  private String getTranslation(String originalText, String languageCode, HttpServletResponse response) {
     Translate translate = TranslateOptions.getDefaultInstance().getService();
     Translation translation = translate.translate(
       originalText, 
       Translate.TranslateOption.targetLanguage(languageCode)
     );
+    response.setContentType("text/html; charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
     return translation.getTranslatedText();
   }
   
