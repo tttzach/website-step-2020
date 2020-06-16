@@ -1,4 +1,4 @@
-#coronavirus-chart {
+.chart {
   border: thin solid black;
   display: inline-block;
 }
@@ -7,15 +7,5 @@
   border: thin solid black;
   height: 500px;
   width: 700px;
-  display: inline-block;
-}
-
-#pie-chart {
-  border: thin solid black;
-  display: inline-block;
-}
-
-#regions-chart {
-  border: thin solid black;
   display: inline-block;
 }
