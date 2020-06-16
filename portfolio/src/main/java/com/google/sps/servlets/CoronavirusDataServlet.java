@@ -16,7 +16,6 @@ package com.google.sps.servlets;
 
 import com.opencsv.CSVReaderHeaderAware;
 import com.google.gson.Gson;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -34,7 +33,7 @@ public class CoronavirusDataServlet extends HttpServlet {
 
   @Override
   public void init() {
-    String filePath = "/home/tanzachary/step/portfolio/src/main/webapp/WEB-INF/coronavirus-stats-by-country.csv";
+    String filePath = "../../src/main/webapp/WEB-INF/coronavirus-stats-by-country.csv";
     readCsv(filePath);
   }
 
@@ -60,5 +59,5 @@ public class CoronavirusDataServlet extends HttpServlet {
       System.out.println("File not found.");
     }
   }
-  
+
 }
