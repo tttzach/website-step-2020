@@ -19,8 +19,9 @@ import com.google.gson.Gson;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/coronavirus-data")
 public class CoronavirusDataServlet extends HttpServlet {
 
-  private final LinkedHashMap<String, Integer> coronavirusCases = new LinkedHashMap<>();
+  private final Map<String, Integer> coronavirusCases = new HashMap<>();
 
   @Override
   public void init() {
