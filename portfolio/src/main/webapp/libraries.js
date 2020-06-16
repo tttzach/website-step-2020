@@ -148,7 +148,7 @@ async function getLoginStatus() {
   const response = await fetch('/authentication');
   const responseHtml = await response.text();
   document.getElementById('login-status').innerHTML = responseHtml;
-  if (responseHtml.includes("Logout")) {
-    document.getElementById('comments-form').style.display = "block";
+  if (responseHtml.includes('Logout')) {
+    document.getElementById('comments-form').style.display = 'block';
   }
 }
