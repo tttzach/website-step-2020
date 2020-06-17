@@ -9,3 +9,7 @@
   width: 700px;
   display: inline-block;
 }
+
+#comments-form {
+  display: none;
+}
