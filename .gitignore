@@ -1,4 +1,8 @@
-walkthroughs/
+walkthroughs/week-1-setup/
+walkthroughs/week-2-web-development/
+walkthroughs/week-3-server/
+walkthroughs/week-4-libraries/
+walkthroughs/week-5-tdd/intro/
 portfolio/bin/
 portfolio/target/
 portfolio/.settings
