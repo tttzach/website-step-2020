@@ -145,11 +145,11 @@ async function getLoginStatus() {
   if (userEmail == 'N/A') {
     const html = loginHtml(redirectUrl);
     document.getElementById('login-status').innerHTML = html;
-  } else {
-    const html = logoutHtml(userEmail, redirectUrl);
-    document.getElementById('login-status').innerHTML = html;
-    document.getElementById('comments-form').style.display = "block";
+    return;
   }
+  const html = logoutHtml(userEmail, redirectUrl);
+  document.getElementById('login-status').innerHTML = html;
+  document.getElementById('comments-form').style.display = "block";
 }
 
 function getEmail(json) {

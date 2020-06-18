@@ -37,11 +37,11 @@ public class AuthenticationServlet extends HttpServlet {
       String logoutUrl = userService.createLogoutURL(redirectUrl);
       Pair<String, String> userInfo = new Pair<>(userEmail, logoutUrl);
       sendJson(response, userInfo);
-    } else {
-      String loginUrl = userService.createLoginURL(redirectUrl);
-      Pair<String, String> userInfo = new Pair<>("N/A", loginUrl);
-      sendJson(response, userInfo);
+      return;
     }
+    String loginUrl = userService.createLoginURL(redirectUrl);
+    Pair<String, String> userInfo = new Pair<>("N/A", loginUrl);
+    sendJson(response, userInfo);
   }
 
   private void sendJson(HttpServletResponse response, Pair<String, String> userInfo) throws IOException {
