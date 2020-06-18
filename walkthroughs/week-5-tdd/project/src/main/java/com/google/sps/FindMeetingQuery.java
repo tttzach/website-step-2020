@@ -22,6 +22,7 @@ import java.util.Set;
 
 public final class FindMeetingQuery {
 
+  // Get all suitable time ranges which do not conflict with the events of attendees in the meeting request
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     long proposedDuration = request.getDuration();
     Collection<String> proposedAttendees = request.getAttendees();
@@ -67,7 +68,7 @@ public final class FindMeetingQuery {
         }
       }
     }
-    
+
     // Add available time slot from end of last event to end of day, if applicable
     if ((TimeRange.END_OF_DAY - proposedStartTime) >= proposedDuration) {
       proposedTimeRanges.add(TimeRange.fromStartEnd(proposedStartTime, TimeRange.END_OF_DAY, true));
