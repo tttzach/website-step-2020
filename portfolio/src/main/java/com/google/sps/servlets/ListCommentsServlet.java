@@ -22,6 +22,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -35,29 +36,38 @@ public class ListCommentsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    final Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    PreparedQuery results = prepareQuery();
+    int max = getMax(request);
+    List<String> comments = getCommentsToDisplay(results, max);
+    sendJson(response, comments);
+  }
 
-    final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    final PreparedQuery results = datastore.prepare(query);
+  private PreparedQuery prepareQuery() {
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    return datastore.prepare(query);
+  }
 
-    // queryString = "max=2";
-    final String queryString = request.getQueryString();
-    final String maxString = queryString.split("=")[1];
-    final int max = Integer.parseInt(maxString);
-    int index = 0;
+  private int getMax(HttpServletRequest request) {
+    // queryString = "max=...";
+    String queryString = request.getQueryString();
+    String maxString = queryString.split("=")[1];
+    return Integer.parseInt(maxString);
+  }
 
+  private List<String> getCommentsToDisplay(PreparedQuery results, int max) {
     List<String> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      if (index == max) {
-        break;
-      }
-      final String comment = (String) entity.getProperty("comment");
+    Iterator<Entity> iterator = results.asIterator();
+    for (int i = 0; (i < max) && (iterator.hasNext()); ++i) {
+      Entity entity = iterator.next();
+      String comment = (String) entity.getProperty("comment");
       comments.add(comment);
-      ++index;
     }
+    return comments;
+  }
 
-    final Gson gson = new Gson();
-
+  private void sendJson(HttpServletResponse response, List<String> comments) throws IOException {
+    Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
   }

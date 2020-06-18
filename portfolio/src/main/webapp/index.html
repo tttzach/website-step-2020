@@ -3,9 +3,13 @@
 <title>a terrible website</title>
 <link rel="favicon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="libraries.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcZGCU3AsjgfDepEB6yjW70pkW6KWohZo"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="script.js"></script>
-<body onload="getGreeting()">
+<script src="libraries.js"></script>
+<body onload="getGreeting(); createMap(); getLoginStatus();">
 <!-- Two-column layout -->
 <div class="row">
   <div class="column-left">
@@ -26,22 +30,35 @@
 <div class="row">
   <div id="comments" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
-    <form action="/new-comment" method="POST">
-    <p>Type a comment here: <input type="text" name="comment"><input type="submit"/>
-    </form>
-    <p>Load how many comments: <input type="int" id="max" name="max" value="" onchange="loadComments(this.value)">
-    <br/><br/>
-    <div id="comments-list"></div>
-    <br/><br/>
-    <form action="/delete-comment" method="POST">
-    <input type="submit" name="delete" value="Delete" />
-    </form>
-    <br/><br/>
+    <div id="login-status"></div>
+    <div id="comments-form">
+      <form action="/new-comment" method="POST">
+      <p>Type a comment here: <input type="text" name="comment"><input type="submit"/>
+      </form>
+      <p>Load how many comments: <input type="int" id="max" name="max" value="" onchange="loadComments(this.value)">
+      <br/><br/>
+      <div id="comments-list"></div>
+      <br/><br/>
+      <form action="/delete-comment" method="POST">
+      <input type="submit" name="delete" value="Delete" />
+      </form>
+      <br/><br/>
+    </div>
   </div>
   <div id="about-me" class="containerTab">
     <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
     <h2>About Me</h2>
-    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major in Combinatorics & Optimization and a minor in Computer Science.<br/>Feel free to click on the other tabs for more not-so-exciting information about me.
+    <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major
+      in Combinatorics & Optimization and a minor in Computer Science.<br/>Feel free to click on the other
+      tabs for more not-so-exciting information about me.
+    <div id="map"></div>
+    <br/><br/>
+    <div id="pie-chart" class="chart"></div>
+    <br/><br/>
+    <div id="regions-chart" class="chart"></div>
+    <br/><br/>
+    <div id="coronavirus-chart" class="chart"></div>
+    <br/><br/>
     <p><img class="about-me-img" src="images/meme.jpg" alt="Picture of Meme">
   </div>
   <div id="technical" class="containerTab">

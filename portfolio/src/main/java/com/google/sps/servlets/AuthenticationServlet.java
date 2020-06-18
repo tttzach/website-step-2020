@@ -14,36 +14,29 @@
 
 package com.google.sps.servlets;
 
-import com.google.gson.Gson;
-import java.util.Arrays;
-import java.util.List;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+@WebServlet("/authentication")
+public class AuthenticationServlet extends HttpServlet {
 
-  // Intercept on HTTP GET Requests
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Create list of podmates
-    List<String> podmates = Arrays.asList("Austin", "Aymar", "Zachary");
-    // Convert the podmates list to JSON
-    String json = convertToJsonUsingGson(podmates);
-    // Send the JSON as the response
-    response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.setContentType("text/html");
+    UserService userService = UserServiceFactory.getUserService();
+    String redirectUrl = "/index.html";
+    if (userService.isUserLoggedIn()) {
+      String logoutUrl = userService.createLogoutURL(redirectUrl);
+      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.");
+    } else {
+      String loginUrl = userService.createLoginURL(redirectUrl);
+      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.");
+    }
   }
-
-  // Converts a podmates List into a JSON string using the Gson library.
-  private String convertToJsonUsingGson(List<String> list) {
-    Gson gson = new Gson();
-    String json = gson.toJson(list);
-    return json;
-  }
-
+  
 }

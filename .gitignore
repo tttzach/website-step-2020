@@ -1,6 +1,11 @@
 walkthroughs/
 portfolio/bin/
-portfolio/.settings/
+portfolio/target/
+portfolio/.settings
+portfolio/.classpath
+portfolio/.factorypath
+portfolio/.project
+portfolio/portfolio.iml
 
 # Google App Engine generated folder
 appengine-generated/

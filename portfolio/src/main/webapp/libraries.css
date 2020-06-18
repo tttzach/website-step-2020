@@ -1,0 +1,15 @@
+.chart {
+  border: thin solid black;
+  display: inline-block;
+}
+
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 700px;
+  display: inline-block;
+}
+
+#comments-form {
+  display: none;
+}
