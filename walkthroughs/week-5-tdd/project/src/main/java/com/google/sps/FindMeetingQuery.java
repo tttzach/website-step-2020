@@ -14,10 +14,65 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 public final class FindMeetingQuery {
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    long proposedDuration = request.getDuration();
+    Collection<String> proposedAttendees = request.getAttendees();
+
+    List<TimeRange> unavailableTimeRanges = getUnavailableTimeRanges(events, proposedAttendees);
+    List<TimeRange> availableTimeRanges = getAvailableTimeRanges(unavailableTimeRanges, proposedDuration);
+
+    return availableTimeRanges;
+  }
+
+  // Collect all time ranges of events that involve any of the proposed meeting attendees
+  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
+    List<TimeRange> eventTimeRanges = new ArrayList<>();
+    for (Event event : events) {
+      Set<String> eventAttendees = event.getAttendees();
+      TimeRange eventTimeRange = event.getWhen();
+      for (String eventAttendee : eventAttendees) {
+        if (proposedAttendees.contains(eventAttendee)) {
+          eventTimeRanges.add(eventTimeRange);
+        }
+      }
+    }
+    return eventTimeRanges;
+  }
+
+  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> eventTimeRanges, long proposedDuration) {
+    List<TimeRange> sortedEventStartTimeRanges  = new ArrayList<>(eventTimeRanges);
+    Collections.sort(sortedEventStartTimeRanges, TimeRange.ORDER_BY_START);
+
+    int proposedStartTime = TimeRange.START_OF_DAY;
+    List<TimeRange> proposedTimeRanges = new ArrayList<>();
+
+    for (TimeRange timeRange : sortedEventStartTimeRanges) {
+      if (timeRange.start() > proposedStartTime) {
+        TimeRange newTimeRange = TimeRange.fromStartEnd(proposedStartTime, timeRange.start(), false);
+        if (newTimeRange.duration() >= proposedDuration) {
+          proposedTimeRanges.add(newTimeRange);
+        }
+        proposedStartTime = timeRange.end();
+      } else {
+        if (proposedStartTime < timeRange.end()) {
+          proposedStartTime = timeRange.end();
+        }
+      }
+    }
+    
+    // Add available time slot from end of last event to end of day, if applicable
+    if ((TimeRange.END_OF_DAY - proposedStartTime) >= proposedDuration) {
+      proposedTimeRanges.add(TimeRange.fromStartEnd(proposedStartTime, TimeRange.END_OF_DAY, true));
+    }
+
+    return proposedTimeRanges;
   }
 }
