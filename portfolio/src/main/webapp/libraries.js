@@ -168,9 +168,9 @@ function getUrl(json) {
 }
 
 function loginHtml(loginUrl) {
-  return "<p>Login <a href=\"" + loginUrl + "\">here</a>.";
+  return `<p>Login <a href=\ ${loginUrl} \>here</a>.`;
 }
 
 function logoutHtml(userEmail, logoutUrl) {
-  return "<p>Hi " + userEmail + "! Logout <a href=\"" + logoutUrl + "\">here</a>.";
+  return `<p>Hi ${userEmail}! Logout <a href=\ ${logoutUrl} \>here</a>.`;
 }
