@@ -17,6 +17,8 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.List;
 import java.util.Set;
 
@@ -25,22 +27,29 @@ public final class FindMeetingQuery {
   // Get all suitable time ranges which do not conflict with the events of attendees in the meeting request
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     long proposedDuration = request.getDuration();
-    Collection<String> proposedAttendees = request.getAttendees();
+    Collection<String> mandatoryAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
 
-    List<TimeRange> unavailableTimeRanges = getUnavailableTimeRanges(events, proposedAttendees);
-    List<TimeRange> availableTimeRanges = getAvailableTimeRanges(unavailableTimeRanges, proposedDuration);
+    List<TimeRange> mandatoryUnavailableTimeRanges = getUnavailableTimeRanges(events, mandatoryAttendees);
+    List<TimeRange> optionalUnavailableTimeRanges = getUnavailableTimeRanges(events, optionalAttendees);
+    List<TimeRange> mandatoryAvailableTimeRanges = getAvailableTimeRanges(mandatoryUnavailableTimeRanges, proposedDuration);
+    List<TimeRange> combinedTimeRanges = Stream.concat(mandatoryUnavailableTimeRanges.stream(), optionalUnavailableTimeRanges.stream()).collect(Collectors.toList());
+    List<TimeRange> combinedAvailableTimeRanges = getAvailableTimeRanges(combinedTimeRanges, proposedDuration);
 
-    return availableTimeRanges;
+    if (combinedAvailableTimeRanges.isEmpty() && !mandatoryAttendees.isEmpty()) {
+      return mandatoryAvailableTimeRanges;
+    }
+    return combinedAvailableTimeRanges;
   }
 
-  // Collect all time ranges of events that involve any of the proposed meeting attendees
-  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
+  // Collect all time ranges of events that involve any of the attendees
+  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> attendees) {
     List<TimeRange> eventTimeRanges = new ArrayList<>();
     for (Event event : events) {
       Set<String> eventAttendees = event.getAttendees();
       TimeRange eventTimeRange = event.getWhen();
       for (String eventAttendee : eventAttendees) {
-        if (proposedAttendees.contains(eventAttendee)) {
+        if (attendees.contains(eventAttendee)) {
           eventTimeRanges.add(eventTimeRange);
         }
       }
