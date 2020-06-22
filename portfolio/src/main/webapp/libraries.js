@@ -160,11 +160,11 @@ async function getLoginStatus() {
 }
 
 function getEmail(json) {
-  return json.val0;
+  return json["email"];
 }
 
 function getUrl(json) {
-  return json.val1;
+  return json["url"];
 }
 
 function loginHtml(loginUrl) {

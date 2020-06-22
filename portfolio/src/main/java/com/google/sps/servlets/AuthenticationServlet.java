@@ -22,7 +22,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.javatuples.Pair;
 
 @WebServlet("/authentication")
 public class AuthenticationServlet extends HttpServlet {
@@ -35,19 +34,19 @@ public class AuthenticationServlet extends HttpServlet {
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(redirectUrl);
-      Pair<String, String> userInfo = new Pair<>(userEmail, logoutUrl);
+      Pair userInfo = new Pair(userEmail, logoutUrl);
       sendJson(response, userInfo);
       return;
     }
     String loginUrl = userService.createLoginURL(redirectUrl);
-    Pair<String, String> userInfo = new Pair<>("N/A", loginUrl);
+    Pair userInfo = new Pair("N/A", loginUrl);
     sendJson(response, userInfo);
   }
 
-  private void sendJson(HttpServletResponse response, Pair<String, String> userInfo) throws IOException {
+  private void sendJson(HttpServletResponse response, Pair userInfo) throws IOException {
     Gson gson = new Gson();
     String json = gson.toJson(userInfo);
     response.getWriter().println(json);
   }
-  
+
 }
