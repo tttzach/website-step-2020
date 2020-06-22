@@ -35,21 +35,21 @@ public final class FindMeetingQuery {
 
   // Collect all time ranges of events that involve any of the proposed meeting attendees
   private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
-    List<TimeRange> eventTimeRanges = new ArrayList<>();
+    List<TimeRange> unavailableTimeRanges = new ArrayList<>();
     for (Event event : events) {
       Set<String> eventAttendees = event.getAttendees();
-      TimeRange eventTimeRange = event.getWhen();
+      TimeRange unavailableTimeRange = event.getWhen();
       for (String eventAttendee : eventAttendees) {
         if (proposedAttendees.contains(eventAttendee)) {
-          eventTimeRanges.add(eventTimeRange);
+          unavailableTimeRanges.add(unavailableTimeRange);
         }
       }
     }
-    return eventTimeRanges;
+    return unavailableTimeRanges;
   }
 
-  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> eventTimeRanges, long proposedDuration) {
-    List<TimeRange> sortedEventStartTimeRanges  = new ArrayList<>(eventTimeRanges);
+  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> unavailableTimeRanges, long proposedDuration) {
+    List<TimeRange> sortedEventStartTimeRanges  = new ArrayList<>(unavailableTimeRanges);
     Collections.sort(sortedEventStartTimeRanges, TimeRange.ORDER_BY_START);
 
     int proposedStartTime = TimeRange.START_OF_DAY;
