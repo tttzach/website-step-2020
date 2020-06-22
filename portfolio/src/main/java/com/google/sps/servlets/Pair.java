@@ -16,12 +16,20 @@ package com.google.sps.servlets;
 
 public class Pair {
 
-  String email;
-  String url;
+  private String email;
+  private String url;
 
   Pair(String email, String url) {
     this.email = email;
     this.url = url;
+  }
+
+  public String getEmail(){
+    return email;
+  }
+
+  public String getUrl(){
+    return url;
   }
 
 }
