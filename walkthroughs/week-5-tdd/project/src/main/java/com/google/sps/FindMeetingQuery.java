@@ -42,6 +42,7 @@ public final class FindMeetingQuery {
       for (String eventAttendee : eventAttendees) {
         if (proposedAttendees.contains(eventAttendee)) {
           unavailableTimeRanges.add(unavailableTimeRange);
+          break;
         }
       }
     }
