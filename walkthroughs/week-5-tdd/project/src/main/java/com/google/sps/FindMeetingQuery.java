@@ -61,12 +61,8 @@ public final class FindMeetingQuery {
         if (newTimeRange.duration() >= proposedDuration) {
           proposedTimeRanges.add(newTimeRange);
         }
-        proposedStartTime = timeRange.end();
-      } else {
-        if (proposedStartTime < timeRange.end()) {
-          proposedStartTime = timeRange.end();
-        }
-      }
+      } 
+      proposedStartTime = Math.max(proposedStartTime, timeRange.end());
     }
 
     // Add available time slot from end of last event to end of day, if applicable
