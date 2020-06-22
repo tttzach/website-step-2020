@@ -15,9 +15,9 @@
 package com.google.sps.servlets;
 
 public class Pair {
-  
-  private String email;
-  private String url;
+
+  String email;
+  String url;
 
   Pair(String email, String url) {
     this.email = email;
