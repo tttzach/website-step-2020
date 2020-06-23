@@ -17,12 +17,12 @@ package com.google.sps.servlets;
 public class UserInfo {
 
   private String email;
-  private String url;
+  private String loginOrLogoutUrl;
   private boolean loggedIn;
 
-  UserInfo(String email, String url, boolean loggedIn) {
+  UserInfo(String email, String loginOrLogoutUrl, boolean loggedIn) {
     this.email = email;
-    this.url = url;
+    this.loginOrLogoutUrl = loginOrLogoutUrl;
     this.loggedIn = loggedIn;
   }
 
@@ -30,8 +30,8 @@ public class UserInfo {
     return email;
   }
 
-  public String getUrl(){
-    return url;
+  public String getLoginOrLogoutUrl(){
+    return loginOrLogoutUrl;
   }
 
   public boolean isLoggedIn() {
