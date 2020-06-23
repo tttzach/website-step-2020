@@ -14,10 +14,61 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 public final class FindMeetingQuery {
+
+  // Get all suitable time ranges which do not conflict with the events of attendees in the meeting request
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    long proposedDuration = request.getDuration();
+    Collection<String> proposedAttendees = request.getAttendees();
+
+    List<TimeRange> unavailableTimeRanges = getUnavailableTimeRanges(events, proposedAttendees);
+    List<TimeRange> availableTimeRanges = getAvailableTimeRanges(unavailableTimeRanges, proposedDuration);
+
+    return availableTimeRanges;
   }
+
+  // Collect all time ranges of events that involve any of the proposed meeting attendees
+  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
+    List<TimeRange> unavailableTimeRanges = new ArrayList<>();
+    for (Event event : events) {
+      Set<String> unavailableAttendees = event.getAttendees();
+      TimeRange unavailableTimeRange = event.getWhen();
+      if (!Collections.disjoint(proposedAttendees, unavailableAttendees)) {
+        unavailableTimeRanges.add(unavailableTimeRange);
+      }
+    }
+    return unavailableTimeRanges;
+  }
+
+  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> unavailableTimeRanges, long proposedDuration) {
+    List<TimeRange> sortedUnavailableStartTimeRanges  = new ArrayList<>(unavailableTimeRanges);
+    Collections.sort(sortedUnavailableStartTimeRanges, TimeRange.ORDER_BY_START);
+
+    int proposedStartTime = TimeRange.START_OF_DAY;
+    List<TimeRange> proposedTimeRanges = new ArrayList<>();
+
+    for (TimeRange timeRange : sortedUnavailableStartTimeRanges) {
+      if (timeRange.start() > proposedStartTime) {
+        TimeRange newTimeRange = TimeRange.fromStartEnd(proposedStartTime, timeRange.start(), false);
+        if (newTimeRange.duration() >= proposedDuration) {
+          proposedTimeRanges.add(newTimeRange);
+        }
+      } 
+      proposedStartTime = Math.max(proposedStartTime, timeRange.end());
+    }
+
+    // Add available time slot from end of last event to end of day, if applicable
+    if ((TimeRange.END_OF_DAY - proposedStartTime) >= proposedDuration) {
+      proposedTimeRanges.add(TimeRange.fromStartEnd(proposedStartTime, TimeRange.END_OF_DAY, true));
+    }
+
+    return proposedTimeRanges;
+  }
+
 }
