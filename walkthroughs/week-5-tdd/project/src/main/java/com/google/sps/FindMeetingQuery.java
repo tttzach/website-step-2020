@@ -37,9 +37,9 @@ public final class FindMeetingQuery {
   private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
     List<TimeRange> unavailableTimeRanges = new ArrayList<>();
     for (Event event : events) {
-      Set<String> eventAttendees = event.getAttendees();
+      Set<String> unavailableAttendees = event.getAttendees();
       TimeRange unavailableTimeRange = event.getWhen();
-      if (!Collections.disjoint(proposedAttendees, eventAttendees)) {
+      if (!Collections.disjoint(proposedAttendees, unavailableAttendees)) {
         unavailableTimeRanges.add(unavailableTimeRange);
       }
     }
@@ -47,13 +47,13 @@ public final class FindMeetingQuery {
   }
 
   private List<TimeRange> getAvailableTimeRanges(List<TimeRange> unavailableTimeRanges, long proposedDuration) {
-    List<TimeRange> sortedEventStartTimeRanges  = new ArrayList<>(unavailableTimeRanges);
-    Collections.sort(sortedEventStartTimeRanges, TimeRange.ORDER_BY_START);
+    List<TimeRange> sortedUnavailableStartTimeRanges  = new ArrayList<>(unavailableTimeRanges);
+    Collections.sort(sortedUnavailableStartTimeRanges, TimeRange.ORDER_BY_START);
 
     int proposedStartTime = TimeRange.START_OF_DAY;
     List<TimeRange> proposedTimeRanges = new ArrayList<>();
 
-    for (TimeRange timeRange : sortedEventStartTimeRanges) {
+    for (TimeRange timeRange : sortedUnavailableStartTimeRanges) {
       if (timeRange.start() > proposedStartTime) {
         TimeRange newTimeRange = TimeRange.fromStartEnd(proposedStartTime, timeRange.start(), false);
         if (newTimeRange.duration() >= proposedDuration) {
