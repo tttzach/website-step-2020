@@ -17,6 +17,8 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +31,20 @@ public class NewCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+    String email = userService.getCurrentUser().getEmail();
     String comment = request.getParameter("comment");
     long timestamp = System.currentTimeMillis();
-    Entity commentEntity = createEntity(comment, timestamp);
+    Entity commentEntity = createEntity(comment, timestamp, email);
     putEntity(commentEntity);
     response.sendRedirect("/index.html");
   }
 
-  private Entity createEntity(String comment, long timestamp) {
+  private Entity createEntity(String comment, long timestamp, String email) {
     Entity entity = new Entity("Comment");
     entity.setProperty("comment", comment);
     entity.setProperty("timestamp", timestamp);
+    entity.setProperty("email", email);
     return entity;
   }
 
