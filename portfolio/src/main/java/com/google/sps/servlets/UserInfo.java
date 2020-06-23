@@ -18,10 +18,12 @@ public class UserInfo {
 
   private String email;
   private String url;
+  private boolean loggedIn;
 
-  UserInfo(String email, String url) {
+  UserInfo(String email, String url, boolean loggedIn) {
     this.email = email;
     this.url = url;
+    this.loggedIn = loggedIn;
   }
 
   public String getEmail(){
@@ -30,6 +32,10 @@ public class UserInfo {
 
   public String getUrl(){
     return url;
+  }
+
+  public boolean isLoggedIn() {
+    return loggedIn;
   }
 
 }

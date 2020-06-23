@@ -149,7 +149,8 @@ async function getLoginStatus() {
   const json = await response.json();
   const userEmail = getEmail(json);
   const redirectUrl = getUrl(json);
-  if (userEmail == 'N/A') {
+  const loggedIn = json["loggedIn"];
+  if (!loggedIn) {
     const html = loginHtml(redirectUrl);
     document.getElementById('login-status').innerHTML = html;
     return;
