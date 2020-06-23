@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+/**
+ * Stores user information for authentication purposes.
+ */
 public class UserInfo {
 
   private String email;
@@ -21,29 +24,50 @@ public class UserInfo {
   private String logoutUrl;
   private boolean loggedIn;
 
+  /**
+   * Store relevant logout information when user is logged in
+   * @param email
+   * @param logoutUrl
+   */
   public void loggedIn(String email, String logoutUrl) {
     this.email = email;
     this.logoutUrl = logoutUrl;
     this.loggedIn = true;
   }
 
+  /**
+   * Store relevant login information when user is logged out
+   * @param loginUrl
+   */
   public void loggedOut(String loginUrl) {
     this.loginUrl = loginUrl;
     this.loggedIn = false;
   }
 
+  /**
+   * @return user email
+   */
   public String getEmail(){
     return email;
   }
 
+  /**
+   * @return url to log user in
+   */
   public String getLoginUrl(){
     return loginUrl;
   }
 
+  /**
+   * @return url to log user out
+   */
   public String getLogoutUrl(){
     return logoutUrl;
   }
 
+  /**
+   * @return user login status
+   */
   public boolean isLoggedIn() {
     return loggedIn;
   }
