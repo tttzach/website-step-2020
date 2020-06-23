@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
-public final class Utils {
+public final class JsonUtil {
 
   public static void sendJson(HttpServletResponse response, Object object) throws IOException {
     Gson gson = new Gson();

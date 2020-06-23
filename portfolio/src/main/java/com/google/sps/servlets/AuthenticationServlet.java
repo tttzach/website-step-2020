@@ -34,12 +34,12 @@ public class AuthenticationServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(redirectUrl);
       UserInfo userInfo = new UserInfo(userEmail, logoutUrl, true);
-      Utils.sendJson(response, userInfo);
+      JsonUtil.sendJson(response, userInfo);
       return;
     }
     String loginUrl = userService.createLoginURL(redirectUrl);
     UserInfo userInfo = new UserInfo("", loginUrl, false);
-    Utils.sendJson(response, userInfo);
+    JsonUtil.sendJson(response, userInfo);
   }
 
 }
