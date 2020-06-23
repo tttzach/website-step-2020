@@ -33,12 +33,12 @@ public class AuthenticationServlet extends HttpServlet {
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(redirectUrl);
-      Pair userInfo = new Pair(userEmail, logoutUrl);
+      UserInfo userInfo = new UserInfo(userEmail, logoutUrl);
       Utilities.sendJson(response, userInfo);
       return;
     }
     String loginUrl = userService.createLoginURL(redirectUrl);
-    Pair userInfo = new Pair("N/A", loginUrl);
+    UserInfo userInfo = new UserInfo("N/A", loginUrl);
     Utilities.sendJson(response, userInfo);
   }
 

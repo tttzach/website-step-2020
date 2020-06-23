@@ -14,12 +14,12 @@
 
 package com.google.sps.servlets;
 
-public class Pair {
+public class UserInfo {
 
   private String email;
   private String url;
 
-  Pair(String email, String url) {
+  UserInfo(String email, String url) {
     this.email = email;
     this.url = url;
   }
