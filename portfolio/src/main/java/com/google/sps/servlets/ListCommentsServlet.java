@@ -39,7 +39,7 @@ public class ListCommentsServlet extends HttpServlet {
     PreparedQuery results = prepareQuery();
     int max = getMax(request);
     List<String> comments = getCommentsToDisplay(results, max);
-    sendJson(response, comments);
+    Utilities.sendJson(response, comments);
   }
 
   private PreparedQuery prepareQuery() {
@@ -65,12 +65,6 @@ public class ListCommentsServlet extends HttpServlet {
       comments.add(email + ": " + comment);
     }
     return comments;
-  }
-
-  private void sendJson(HttpServletResponse response, List<String> comments) throws IOException {
-    Gson gson = new Gson();
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
   }
   
 }

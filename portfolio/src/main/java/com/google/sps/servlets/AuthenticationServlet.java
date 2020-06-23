@@ -16,7 +16,6 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,18 +34,12 @@ public class AuthenticationServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String logoutUrl = userService.createLogoutURL(redirectUrl);
       Pair userInfo = new Pair(userEmail, logoutUrl);
-      sendJson(response, userInfo);
+      Utilities.sendJson(response, userInfo);
       return;
     }
     String loginUrl = userService.createLoginURL(redirectUrl);
     Pair userInfo = new Pair("N/A", loginUrl);
-    sendJson(response, userInfo);
-  }
-
-  private void sendJson(HttpServletResponse response, Pair userInfo) throws IOException {
-    Gson gson = new Gson();
-    String json = gson.toJson(userInfo);
-    response.getWriter().println(json);
+    Utilities.sendJson(response, userInfo);
   }
 
 }
