@@ -147,14 +147,15 @@ function drawCoronavirusChart() {
 async function getLoginStatus() {
   const response = await fetch('/authentication');
   const json = await response.json();
-  const userEmail = json["email"];
-  const redirectUrl = json["loginOrLogoutUrl"];
   const loggedIn = json["loggedIn"];
   if (!loggedIn) {
+    const redirectUrl = json["loginUrl"];
     const html = loginHtml(redirectUrl);
     document.getElementById('login-status').innerHTML = html;
     return;
   }
+  const userEmail = json["email"];
+  const redirectUrl = json["logoutUrl"];
   const html = logoutHtml(userEmail, redirectUrl);
   document.getElementById('login-status').innerHTML = html;
   document.getElementById('comments-form').style.display = "block";
