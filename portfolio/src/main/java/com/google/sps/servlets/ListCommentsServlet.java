@@ -39,7 +39,7 @@ public class ListCommentsServlet extends HttpServlet {
     PreparedQuery results = prepareQuery();
     int max = getMax(request);
     List<String> comments = getCommentsToDisplay(results, max);
-    Utilities.sendJson(response, comments);
+    Utils.sendJson(response, comments);
   }
 
   private PreparedQuery prepareQuery() {
