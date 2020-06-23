@@ -39,11 +39,8 @@ public final class FindMeetingQuery {
     for (Event event : events) {
       Set<String> eventAttendees = event.getAttendees();
       TimeRange unavailableTimeRange = event.getWhen();
-      for (String eventAttendee : eventAttendees) {
-        if (proposedAttendees.contains(eventAttendee)) {
-          unavailableTimeRanges.add(unavailableTimeRange);
-          break;
-        }
+      if (!Collections.disjoint(proposedAttendees, eventAttendees)) {
+        unavailableTimeRanges.add(unavailableTimeRange);
       }
     }
     return unavailableTimeRanges;
