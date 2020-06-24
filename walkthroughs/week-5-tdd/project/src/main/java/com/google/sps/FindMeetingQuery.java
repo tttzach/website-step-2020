@@ -33,8 +33,8 @@ public final class FindMeetingQuery {
     List<TimeRange> mandatoryUnavailableTimeRanges = getUnavailableTimeRanges(events, mandatoryAttendees);
     List<TimeRange> optionalUnavailableTimeRanges = getUnavailableTimeRanges(events, optionalAttendees);
     List<TimeRange> mandatoryAvailableTimeRanges = getAvailableTimeRanges(mandatoryUnavailableTimeRanges, proposedDuration);
-    List<TimeRange> combinedTimeRanges = Stream.concat(mandatoryUnavailableTimeRanges.stream(), optionalUnavailableTimeRanges.stream()).collect(Collectors.toList());
-    List<TimeRange> combinedAvailableTimeRanges = getAvailableTimeRanges(combinedTimeRanges, proposedDuration);
+    List<TimeRange> combinedUnavailableTimeRanges = Stream.concat(mandatoryUnavailableTimeRanges.stream(), optionalUnavailableTimeRanges.stream()).collect(Collectors.toList());
+    List<TimeRange> combinedAvailableTimeRanges = getAvailableTimeRanges(combinedUnavailableTimeRanges, proposedDuration);
 
     if (combinedAvailableTimeRanges.isEmpty() && !mandatoryAttendees.isEmpty()) {
       return mandatoryAvailableTimeRanges;
