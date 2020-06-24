@@ -36,6 +36,7 @@ public final class FindMeetingQuery {
     List<TimeRange> combinedUnavailableTimeRanges = Stream.concat(mandatoryUnavailableTimeRanges.stream(), optionalUnavailableTimeRanges.stream()).collect(Collectors.toList());
     List<TimeRange> combinedAvailableTimeRanges = getAvailableTimeRanges(combinedUnavailableTimeRanges, proposedDuration);
 
+    // If there are mandatory attendees and there are no available time ranges where both optional and mandatory attendees are available
     if (combinedAvailableTimeRanges.isEmpty() && !mandatoryAttendees.isEmpty()) {
       return mandatoryAvailableTimeRanges;
     }
