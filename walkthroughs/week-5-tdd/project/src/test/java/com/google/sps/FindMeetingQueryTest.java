@@ -421,4 +421,53 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+
+  @Test
+  public void freeMandatoryAttendeesButBusyOptionalAttendees() {
+    // Some mandatory attendees with no events the whole day, one optional attendee with a gap in their schedule.
+    // The optional attendee should be considered.
+    //
+    // Events  : |--C--|         |--C--|
+    // Day     : |---------------------|
+    // Options :       |---------|
+
+    Collection<Event> events = Arrays.asList(
+        new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0900AM, false),
+            Arrays.asList(PERSON_C)),
+        new Event("Event 2", TimeRange.fromStartEnd(TIME_1100AM, TimeRange.END_OF_DAY, true),
+            Arrays.asList(PERSON_C)));
+
+    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+
+    request.addOptionalAttendee(PERSON_C);
+
+    Collection<TimeRange> actual = query.query(events, request);
+    Collection<TimeRange> expected = Arrays.asList(TimeRange.fromStartEnd(TIME_0900AM, TIME_1100AM, false));
+
+    Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void freeMandatoryAttendeesButVeryBusyOptionalAttendees() {
+    // Some mandatory attendees with no events the whole day, one optional attendee with no gaps in their schedule.
+    // The optional attendee should not be considered.
+    //
+    // Events  : |----------C----------|
+    // Day     : |---------------------|
+    // Options : |---------------------|
+
+    Collection<Event> events = Arrays.asList(
+        new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true),
+            Arrays.asList(PERSON_C)));
+
+    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+
+    request.addOptionalAttendee(PERSON_C);
+
+    Collection<TimeRange> actual = query.query(events, request);
+    Collection<TimeRange> expected = Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true));
+
+    Assert.assertEquals(expected, actual);
+  }
+  
 }
