@@ -15,22 +15,32 @@
 package com.google.sps;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class FindMeetingQuery {
 
   // Get all suitable time ranges which do not conflict with the events of attendees in the meeting request
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     long proposedDuration = request.getDuration();
-    Collection<String> proposedAttendees = request.getAttendees();
+    Collection<String> mandatoryAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
 
-    List<TimeRange> unavailableTimeRanges = getUnavailableTimeRanges(events, proposedAttendees);
-    List<TimeRange> availableTimeRanges = getAvailableTimeRanges(unavailableTimeRanges, proposedDuration);
+    List<TimeRange> mandatoryUnavailableTimeRanges = getUnavailableTimeRanges(events, mandatoryAttendees);
+    List<TimeRange> optionalUnavailableTimeRanges = getUnavailableTimeRanges(events, optionalAttendees);
+    List<TimeRange> mandatoryAvailableTimeRanges = getAvailableTimeRanges(mandatoryUnavailableTimeRanges, proposedDuration);
+    List<TimeRange> combinedUnavailableTimeRanges = Stream.concat(mandatoryUnavailableTimeRanges.stream(), optionalUnavailableTimeRanges.stream()).collect(Collectors.toList());
+    List<TimeRange> combinedAvailableTimeRanges = getAvailableTimeRanges(combinedUnavailableTimeRanges, proposedDuration);
 
-    return availableTimeRanges;
+    // If there are mandatory attendees and there are no available time ranges where both optional and mandatory attendees are available
+    if (combinedAvailableTimeRanges.isEmpty() && !mandatoryAttendees.isEmpty()) {
+      return mandatoryAvailableTimeRanges;
+    }
+    return combinedAvailableTimeRanges;
   }
 
   // Collect all time ranges of events that involve any of the proposed meeting attendees
