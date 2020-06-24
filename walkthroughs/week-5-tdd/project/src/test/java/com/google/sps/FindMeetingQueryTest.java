@@ -14,7 +14,6 @@
 
 package com.google.sps;
 
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -469,5 +468,5 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-  
+
 }
