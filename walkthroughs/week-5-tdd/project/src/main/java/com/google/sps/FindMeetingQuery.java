@@ -42,40 +42,34 @@ public final class FindMeetingQuery {
     return combinedAvailableTimeRanges;
   }
 
-  // Collect all time ranges of events that involve any of the attendees
-  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> attendees) {
-    List<TimeRange> eventTimeRanges = new ArrayList<>();
+  // Collect all time ranges of events that involve any of the proposed meeting attendees
+  private List<TimeRange> getUnavailableTimeRanges(Collection<Event> events, Collection<String> proposedAttendees) {
+    List<TimeRange> unavailableTimeRanges = new ArrayList<>();
     for (Event event : events) {
-      Set<String> eventAttendees = event.getAttendees();
-      TimeRange eventTimeRange = event.getWhen();
-      for (String eventAttendee : eventAttendees) {
-        if (attendees.contains(eventAttendee)) {
-          eventTimeRanges.add(eventTimeRange);
-        }
+      Set<String> unavailableAttendees = event.getAttendees();
+      TimeRange unavailableTimeRange = event.getWhen();
+      if (!Collections.disjoint(proposedAttendees, unavailableAttendees)) {
+        unavailableTimeRanges.add(unavailableTimeRange);
       }
     }
-    return eventTimeRanges;
+    return unavailableTimeRanges;
   }
 
-  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> eventTimeRanges, long proposedDuration) {
-    List<TimeRange> sortedEventStartTimeRanges  = new ArrayList<>(eventTimeRanges);
-    Collections.sort(sortedEventStartTimeRanges, TimeRange.ORDER_BY_START);
+  private List<TimeRange> getAvailableTimeRanges(List<TimeRange> unavailableTimeRanges, long proposedDuration) {
+    List<TimeRange> sortedUnavailableStartTimeRanges  = new ArrayList<>(unavailableTimeRanges);
+    Collections.sort(sortedUnavailableStartTimeRanges, TimeRange.ORDER_BY_START);
 
     int proposedStartTime = TimeRange.START_OF_DAY;
     List<TimeRange> proposedTimeRanges = new ArrayList<>();
 
-    for (TimeRange timeRange : sortedEventStartTimeRanges) {
+    for (TimeRange timeRange : sortedUnavailableStartTimeRanges) {
       if (timeRange.start() > proposedStartTime) {
         TimeRange newTimeRange = TimeRange.fromStartEnd(proposedStartTime, timeRange.start(), false);
         if (newTimeRange.duration() >= proposedDuration) {
           proposedTimeRanges.add(newTimeRange);
         }
-        proposedStartTime = timeRange.end();
-      } else {
-        if (proposedStartTime < timeRange.end()) {
-          proposedStartTime = timeRange.end();
-        }
-      }
+      } 
+      proposedStartTime = Math.max(proposedStartTime, timeRange.end());
     }
 
     // Add available time slot from end of last event to end of day, if applicable
