@@ -12,8 +12,8 @@
 
 /* Create two unequal columns that floats next to each other */
 .column-left {
-  font-family: 'Google Sans';
-  background-color: #4285F4;
+  font-family: 'Google Sans', sans-serif;
+  background-color: #4285f4;
   float: left;
   height: 100%;
   padding: 10px;
@@ -65,7 +65,7 @@
 }
 
 /* Clear floats after the columns */
-.row:after {
+.row::after {
   clear: both;
   content: '';
   display: table;

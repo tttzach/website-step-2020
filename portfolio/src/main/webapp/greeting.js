@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Fetches a hard-coded JSON string from the server and adds it as a greeting to the DOM
-async function getGreeting() {
-  const response = await fetch('/data');
-  const json = await response.json();
-  const greeting = jsonToHtml(json);
-  document.getElementById('greeting-container').innerHTML = greeting;
-}
-
 function jsonToHtml(podmates) {
   var html = "<h1>Hello ";
   const lastIndex = podmates.length - 1;
   for (const [index, podmate] of podmates.entries()) {
     html += index == lastIndex ? " and "
-            : index != 0 ? ", "
+            : index !== 0 ? ", "
             : "";
     html += podmate;
   }
   html += "!</h1>";
   return html;
+}
+
+// Fetches a hard-coded JSON string from the server and adds it as a greeting to the DOM
+async function getGreeting() {
+  const response = await fetch("/data");
+  const json = await response.json();
+  const greeting = jsonToHtml(json);
+  document.getElementById("greeting-container").innerHTML = greeting;
 }
