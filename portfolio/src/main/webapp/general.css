@@ -23,8 +23,8 @@
 }
 
 .column-right {
-  font-family: 'Google Sans';
-  background-color: #4285F4;
+  font-family: 'Google Sans', sans-serif;
+  background-color: #4285f4;
   float: left;
   height: 100%;
   line-height: 450px;
