@@ -30,4 +30,4 @@ var plusSlides = (function () {
     slides[slideIndex-1].style.display = "block";
     return slideIndex;
   });
-})();
+}());
