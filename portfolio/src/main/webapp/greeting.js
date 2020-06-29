@@ -30,5 +30,6 @@ async function getGreeting() {
   const response = await fetch("/data");
   const json = await response.json();
   const greeting = jsonToHtml(json);
-  document.getElementById("greeting-container").innerHTML = greeting;
+  var greetingContainer = document.getElementById("greeting-container");
+  greetingContainer.innerHTML = greeting;
 }

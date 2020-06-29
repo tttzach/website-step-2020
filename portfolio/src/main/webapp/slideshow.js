@@ -15,7 +15,7 @@
 // Next/previous controls for slideshow under personal tab
 var plusSlides = (function () {
   var slideIndex = 1;
-  return function(offset) {
+  return (function(offset) {
     slideIndex += offset;
     const slides = document.getElementsByClassName("slide");
     if (slideIndex > slides.length) {
@@ -29,5 +29,5 @@ var plusSlides = (function () {
     }
     slides[slideIndex-1].style.display = "block";
     return slideIndex;
-  };
+  });
 })();
