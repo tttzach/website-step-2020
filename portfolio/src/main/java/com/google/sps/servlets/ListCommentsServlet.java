@@ -17,12 +17,12 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Query;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,9 +56,8 @@ public class ListCommentsServlet extends HttpServlet {
 
   private List<String> getCommentsToDisplay(PreparedQuery results, int max) {
     List<String> comments = new ArrayList<>();
-    Iterator<Entity> iterator = results.asIterator();
-    for (int i = 0; (i < max) && (iterator.hasNext()); ++i) {
-      Entity entity = iterator.next();
+    List<Entity> entities = results.asList(FetchOptions.Builder.withLimit(max));
+    for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
       comments.add(email + ": " + comment);

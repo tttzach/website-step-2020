@@ -2,12 +2,18 @@
 <meta charset="UTF-8">
 <title>a terrible website</title>
 <link rel="favicon" href="favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="general.css">
+<link rel="stylesheet" href="expanding-grid.css">
+<link rel="stylesheet" href="slideshow.css">
+<link rel="stylesheet" href="comments.css">
 <link rel="stylesheet" href="libraries.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcZGCU3AsjgfDepEB6yjW70pkW6KWohZo"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="script.js"></script>
+<script src="greeting.js"></script>
+<script src="expanding-grid.js"></script>
+<script src="slideshow.js"></script>
+<script src="comments.js"></script>
 <script src="libraries.js"></script>
 <body onload="getGreeting(); createMap(); getLoginStatus();">
 <!-- Two-column layout -->
@@ -36,13 +42,10 @@
       <p>Type a comment here: <input type="text" name="comment"><input type="submit"/>
       </form>
       <p>Load how many comments: <input type="int" id="max" name="max" value="" onchange="loadComments(this.value)">
-      <br/><br/>
       <div id="comments-list"></div>
-      <br/><br/>
       <form action="/delete-comment" method="POST">
       <input type="submit" name="delete" value="Delete" />
       </form>
-      <br/><br/>
     </div>
   </div>
   <div id="about-me" class="containerTab">
@@ -51,14 +54,12 @@
     <p>Hello! My name is Zachary, I am a rising junior at the University of Waterloo, Canada pursuing a major
       in Combinatorics & Optimization and a minor in Computer Science.<br/>Feel free to click on the other
       tabs for more not-so-exciting information about me.
-    <div id="map"></div>
-    <br/><br/>
-    <div id="pie-chart" class="chart"></div>
-    <br/><br/>
-    <div id="regions-chart" class="chart"></div>
-    <br/><br/>
-    <div id="coronavirus-chart" class="chart"></div>
-    <br/><br/>
+    <span>
+      <div id="map"></div>
+      <div id="pie-chart" class="chart"></div>
+      <div id="regions-chart" class="chart"></div>
+      <div id="coronavirus-chart" class="chart"></div>
+    </span>
     <p><img class="about-me-img" src="images/meme.jpg" alt="Picture of Meme">
   </div>
   <div id="technical" class="containerTab">
@@ -66,7 +67,11 @@
     <h2>Technical</h2>
     <p>Over the last few years, I worked on a few pet projects and participated in hackathons.
     <h2>Hack the North</h2>
-    <iframe class="technical-vid" src="https://www.youtube.com/embed/vMdTO_IW4fY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe class="technical-vid" title="Hack the North Project Demo" 
+      src="https://www.youtube.com/embed/vMdTO_IW4fY" 
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
     <h2>Waterloo Settlers of Catan</h2>
     <img class="technical-img" src="images/watan.jpg" alt="Picture of Watan">
     <h2>Data Analytics Tool for Reddit</h2>
@@ -125,8 +130,9 @@
         <img class="slide-img" src="images/grid.jpg" alt="Picture at Stadia">
         <div class="text">GRID @ Stadia '20</div>
       </div>
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      <!-- &lt denotes the < symbol and &gt denotes the > symbol -->
+      <a class="prev" onclick="plusSlides(-1)">&lt;</a>
+      <a class="next" onclick="plusSlides(1)">&gt;</a>
     </div>
   </div>
 </div>
