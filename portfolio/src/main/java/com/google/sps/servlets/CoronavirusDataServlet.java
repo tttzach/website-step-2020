@@ -14,10 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.opencsv.CSVReaderHeaderAware;
 import com.google.gson.Gson;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,25 +29,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/coronavirus-data")
 public class CoronavirusDataServlet extends HttpServlet {
 
-  private final LinkedHashMap<String, Integer> coronavirusCases = new LinkedHashMap<>();
+  private final Map<String, Integer> coronavirusCases = new HashMap<>();
 
   @Override
   public void init() {
-    Scanner scanner = new Scanner(getServletContext().getResourceAsStream(
-        "/WEB-INF/coronavirus-stats-by-country.csv"));
-    // Ignore header row = "Country/Region,Confirmed,Active,..."
-    if (scanner.hasNextLine()) {
-      scanner.nextLine();
-    }
-    while (scanner.hasNextLine()) {
-      // line = "Afghanistan,20917,369.0,..."
-      String line = scanner.nextLine();
-      String[] cells = line.split(",");
-      String country = String.valueOf(cells[0]);
-      Integer confirmedCases = Integer.valueOf(cells[1]);
-      coronavirusCases.put(country, confirmedCases);
-    }
-    scanner.close();
+    String filePath = "../../src/main/webapp/WEB-INF/coronavirus-stats-by-country.csv";
+    readCsv(filePath);
   }
 
   @Override
@@ -55,5 +44,20 @@ public class CoronavirusDataServlet extends HttpServlet {
     String json = gson.toJson(coronavirusCases);
     response.getWriter().println(json);
   }
-  
+
+  private void readCsv(String filePath) {
+    try {
+      CSVReaderHeaderAware csvReader = new CSVReaderHeaderAware(new FileReader(filePath));
+      Map<String, String> line;
+      while ((line = csvReader.readMap()) != null) {
+        String country = line.get("Country/Region");
+        Integer confirmedCases = Integer.valueOf(line.get("Confirmed"));
+        coronavirusCases.put(country, confirmedCases);
+      }
+      csvReader.close();
+    } catch (IOException exception) {
+      System.out.println("File not found.");
+    }
+  }
+
 }
