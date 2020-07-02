@@ -52,7 +52,7 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   private int getMax(HttpServletRequest request) {
-    // queryString = "max=...&lang=..."
+    // queryString = "max=...&language=..."
     String queryString = request.getQueryString();
     // maxString = "max=..."
     String maxString = queryString.split("&")[0];
