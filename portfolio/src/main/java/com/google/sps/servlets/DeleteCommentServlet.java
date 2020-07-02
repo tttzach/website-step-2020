@@ -50,5 +50,5 @@ public class DeleteCommentServlet extends HttpServlet {
       datastore.delete(entityKey);
     }
   }
-
+  
 }

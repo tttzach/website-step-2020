@@ -12,8 +12,8 @@
 
 /* Create two unequal columns that floats next to each other */
 .column-left {
-  font-family: 'Google Sans';
-  background-color: #4285F4;
+  font-family: 'Google Sans', sans-serif;
+  background-color: #4285f4;
   float: left;
   height: 100%;
   padding: 10px;
@@ -23,8 +23,8 @@
 }
 
 .column-right {
-  font-family: 'Google Sans';
-  background-color: #4285F4;
+  font-family: 'Google Sans', sans-serif;
+  background-color: #4285f4;
   float: left;
   height: 100%;
   line-height: 450px;
@@ -35,7 +35,7 @@
 }
 
 .containerTab {
-  font-family: 'Google Sans';
+  font-family: 'Google Sans', sans-serif;
   color: white;
   display: none;
   float: center;
@@ -65,7 +65,7 @@
 }
 
 /* Clear floats after the columns */
-.row:after {
+.row::after {
   clear: both;
   content: '';
   display: table;

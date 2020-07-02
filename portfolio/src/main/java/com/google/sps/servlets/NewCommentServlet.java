@@ -14,14 +14,16 @@
 
 package com.google.sps.servlets;
 
-import com.google.cloud.language.v1.Document;
-import com.google.cloud.language.v1.LanguageServiceClient;
-import com.google.cloud.language.v1.Sentiment;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import javax.servlet.annotation.WebServlet;
