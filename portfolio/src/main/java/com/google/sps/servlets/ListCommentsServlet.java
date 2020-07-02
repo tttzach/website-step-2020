@@ -21,6 +21,9 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Query;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,8 @@ public class ListCommentsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     PreparedQuery results = prepareQuery();
     int max = getMax(request);
-    List<String> comments = getCommentsToDisplay(results, max);
+    String language = getLanguage(request);
+    List<String> comments = getCommentsToDisplay(results, max, language);
     JsonUtil.sendJson(response, comments);
   }
 
@@ -48,21 +52,41 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   private int getMax(HttpServletRequest request) {
-    // queryString = "max=...";
+    // queryString = "max=...&language=..."
     String queryString = request.getQueryString();
-    String maxString = queryString.split("=")[1];
-    return Integer.parseInt(maxString);
+    // maxString = "max=..."
+    String maxString = queryString.split("&")[0];
+    String max = maxString.split("=")[1];
+    return Integer.parseInt(max);
   }
 
-  private List<String> getCommentsToDisplay(PreparedQuery results, int max) {
+  private String getLanguage(HttpServletRequest request) {
+    // queryString = "max=...&language=..."
+    String queryString = request.getQueryString();
+    // languageString = "language=..."
+    String languageString = queryString.split("&")[1];
+    return languageString.split("=")[1];
+  }
+
+  private List<String> getCommentsToDisplay(PreparedQuery results, int max, String language) {
     List<String> comments = new ArrayList<>();
     List<Entity> entities = results.asList(FetchOptions.Builder.withLimit(max));
     for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
-      comments.add(email + ": " + comment);
+      String translatedComment = getTranslation(comment, language);
+      comments.add(email + ": " + translatedComment);
     }
     return comments;
+  }
+
+  private String getTranslation(String originalText, String languageCode) {
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+    Translation translation = translate.translate(
+      originalText, 
+      Translate.TranslateOption.targetLanguage(languageCode)
+    );
+    return translation.getTranslatedText();
   }
   
 }

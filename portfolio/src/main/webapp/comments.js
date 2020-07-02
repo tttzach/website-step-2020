@@ -34,9 +34,9 @@ function createCommentElement(comment) {
 }
 
 // Fetches comments from the datastore and adds them to the DOM
-function loadComments(maxInt) {
+function loadComments(maxInt, language) {
   const max = maxInt.toString();
-  fetch('/list-comments?max=' + max)
+  fetch('/list-comments?max=' + max + '&language=' + language)
     .then(response => response.json())
     .then(comments => {
       const commentListElement = document.getElementById('comments-list');
