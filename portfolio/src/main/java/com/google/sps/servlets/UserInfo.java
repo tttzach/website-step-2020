@@ -25,23 +25,32 @@ public class UserInfo {
   private boolean loggedIn;
 
   /**
+   * Make constructor private to prevent empty instances of this class outside of the class
+   */
+  private UserInfo() {}
+
+  /**
    * Store relevant logout information when user is logged in
    * @param email
    * @param logoutUrl
    */
-  public void loggedIn(String email, String logoutUrl) {
-    this.email = email;
-    this.logoutUrl = logoutUrl;
-    this.loggedIn = true;
+  public static UserInfo loggedIn(String email, String logoutUrl) {
+    UserInfo userInfo = new UserInfo();
+    userInfo.email = email;
+    userInfo.logoutUrl = logoutUrl;
+    userInfo.loggedIn = true;
+    return userInfo;
   }
 
   /**
    * Store relevant login information when user is logged out
    * @param loginUrl
    */
-  public void loggedOut(String loginUrl) {
-    this.loginUrl = loginUrl;
-    this.loggedIn = false;
+  public static UserInfo loggedOut(String loginUrl) {
+    UserInfo userInfo = new UserInfo();
+    userInfo.loginUrl = loginUrl;
+    userInfo.loggedIn = false;
+    return userInfo;
   }
 
   /**
