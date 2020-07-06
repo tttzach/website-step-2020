@@ -19,14 +19,12 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.gson.Gson;
+import com.google.appengine.api.datastore.Query;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +42,7 @@ public class ListCommentsServlet extends HttpServlet {
     int max = getMax(request);
     String language = getLanguage(request);
     List<String> comments = getCommentsToDisplay(results, max, language);
-    sendJson(response, comments);
+    JsonUtil.sendJson(response, comments);
   }
 
   private PreparedQuery prepareQuery() {
@@ -54,7 +52,7 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   private int getMax(HttpServletRequest request) {
-    // queryString = "max=...&lang=..."
+    // queryString = "max=...&language=..."
     String queryString = request.getQueryString();
     // maxString = "max=..."
     String maxString = queryString.split("&")[0];
@@ -81,12 +79,6 @@ public class ListCommentsServlet extends HttpServlet {
       comments.add(email + ": " + translatedComment + " (" + score + ")");
     }
     return comments;
-  }
-
-  private void sendJson(HttpServletResponse response, List<String> comments) throws IOException {
-    Gson gson = new Gson();
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
   }
 
   private String getTranslation(String originalText, String languageCode) {

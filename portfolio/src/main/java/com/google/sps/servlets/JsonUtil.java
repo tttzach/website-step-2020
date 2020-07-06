@@ -12,22 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Next/previous controls for slideshow under personal tab
-var plusSlides = (function () {
-  var slideIndex = 1;
-  return (function(offset) {
-    slideIndex += offset;
-    const slides = document.getElementsByClassName("slide");
-    if (slideIndex > slides.length) {
-      slideIndex = 1;
-    }
-    if (slideIndex < 1) {
-      slideIndex = slides.length;
-    }
-    for (var slide of slides) {
-      slide.style.display = "none";
-    }
-    slides[slideIndex-1].style.display = "block";
-    return slideIndex;
-  });
-}());
+package com.google.sps.servlets;
+
+import com.google.gson.Gson;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+
+public final class JsonUtil {
+
+  public static void sendJson(HttpServletResponse response, Object object) throws IOException {
+    Gson gson = new Gson();
+    String json = gson.toJson(object);
+    response.getWriter().println(json);
+  }
+  
+}
