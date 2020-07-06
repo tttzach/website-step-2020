@@ -61,12 +61,12 @@ public class NewCommentServlet extends HttpServlet {
 
   private String getSentimentScore(String text) throws IOException {
     Document doc = Document.newBuilder().setContent(text).setType(Document.Type.PLAIN_TEXT).build();
-    LanguageServiceClient languageService = LanguageServiceClient.create();
-    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    float score = sentiment.getScore();
-    languageService.close();
-    DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
-    return oneDecimalPlace.format(score);
+    try (LanguageServiceClient languageService = LanguageServiceClient.create()) {
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      float score = sentiment.getScore();
+      DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
+      return oneDecimalPlace.format(score);
+    }
   }
 
 }
