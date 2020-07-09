@@ -24,9 +24,6 @@ public class UserInfo {
   private String logoutUrl;
   private boolean loggedIn;
 
-  /**
-   * Make constructor private to prevent empty instances of this class outside of the class
-   */
   private UserInfo() {}
 
   /**
