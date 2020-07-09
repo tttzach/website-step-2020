@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
 
-  static DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
+  private static DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
