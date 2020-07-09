@@ -33,6 +33,7 @@ function loadComments(maxInt, language) {
         commentListElement.appendChild(createCommentElement(comment));
     })
   });
+  // Ensures that form which calls this function does not submit nor redirect
   return false;
 }
 
