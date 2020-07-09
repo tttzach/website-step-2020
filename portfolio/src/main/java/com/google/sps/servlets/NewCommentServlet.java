@@ -18,8 +18,6 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.cloud.language.v1.Document;
 import com.google.cloud.language.v1.LanguageServiceClient;
@@ -34,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 // Servlet responsible for creating new comments.
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
+
+  static DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -66,7 +66,6 @@ public class NewCommentServlet extends HttpServlet {
     try (LanguageServiceClient languageService = LanguageServiceClient.create()) {
       Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
       float score = sentiment.getScore();
-      DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
       return oneDecimalPlace.format(score);
     }
   }
