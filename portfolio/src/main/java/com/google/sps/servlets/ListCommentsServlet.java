@@ -74,8 +74,9 @@ public class ListCommentsServlet extends HttpServlet {
     for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
+      String score = (String) entity.getProperty("score");
       String translatedComment = getTranslation(comment, language);
-      comments.add(email + ": " + translatedComment);
+      comments.add(email + ": " + translatedComment + " (" + score + ")");
     }
     return comments;
   }

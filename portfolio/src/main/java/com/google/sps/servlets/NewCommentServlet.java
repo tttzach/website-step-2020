@@ -19,7 +19,11 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,28 +33,41 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
 
+  private static DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     String email = userService.getCurrentUser().getEmail();
     String comment = request.getParameter("comment");
     long timestamp = System.currentTimeMillis();
-    Entity commentEntity = createEntity(comment, timestamp, email);
+    String score = getSentimentScore(comment);
+    Entity commentEntity = createEntity(comment, timestamp, email, score);
     putEntity(commentEntity);
     response.sendRedirect("/index.html");
   }
 
-  private Entity createEntity(String comment, long timestamp, String email) {
+  private Entity createEntity(String comment, long timestamp, String email, String score) {
     Entity entity = new Entity("Comment");
     entity.setProperty("comment", comment);
     entity.setProperty("timestamp", timestamp);
     entity.setProperty("email", email);
+    entity.setProperty("score", score);
     return entity;
   }
 
   private void putEntity(Entity entity) {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(entity);
+  }
+
+  private String getSentimentScore(String text) throws IOException {
+    Document doc = Document.newBuilder().setContent(text).setType(Document.Type.PLAIN_TEXT).build();
+    try (LanguageServiceClient languageService = LanguageServiceClient.create()) {
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      float score = sentiment.getScore();
+      return oneDecimalPlace.format(score);
+    }
   }
 
 }
