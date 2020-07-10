@@ -45,4 +45,6 @@ function loadComments(maxInt, language) {
         commentListElement.appendChild(createCommentElement(comment));
     });
   });
+  // Ensures that the HTML form which calls this function does not redirect
+  return false;
 }
