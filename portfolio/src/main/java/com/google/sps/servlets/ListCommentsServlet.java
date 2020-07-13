@@ -19,9 +19,8 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.gson.Gson;
+import com.google.appengine.api.datastore.Query;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
@@ -42,7 +41,7 @@ public class ListCommentsServlet extends HttpServlet {
     PreparedQuery results = prepareQuery();
     int max = getMax(request);
     String language = getLanguage(request);
-    List<String> comments = getCommentsToDisplay(results, max, language, response);
+    List<String> comments = getCommentsToDisplay(results, max, language);
     response.setContentType("text/html; charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
     JsonUtil.sendJson(response, comments);
@@ -55,7 +54,7 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   private int getMax(HttpServletRequest request) {
-    // queryString = "max=...&lang=..."
+    // queryString = "max=...&language=..."
     String queryString = request.getQueryString();
     // maxString = "max=..."
     String maxString = queryString.split("&")[0];
@@ -71,14 +70,14 @@ public class ListCommentsServlet extends HttpServlet {
     return languageString.split("=")[1];
   }
 
-  private List<String> getCommentsToDisplay(PreparedQuery results, int max, String language,  HttpServletResponse response) {
+  private List<String> getCommentsToDisplay(PreparedQuery results, int max, String language) {
     List<String> comments = new ArrayList<>();
     List<Entity> entities = results.asList(FetchOptions.Builder.withLimit(max));
     for (Entity entity : entities) {
       String email = (String) entity.getProperty("email");
       String comment = (String) entity.getProperty("comment");
       String score = (String) entity.getProperty("score");
-      String translatedComment = getTranslation(comment, language, response);
+      String translatedComment = getTranslation(comment, language);
       comments.add(email + ": " + translatedComment + " (" + score + ")");
     }
     return comments;

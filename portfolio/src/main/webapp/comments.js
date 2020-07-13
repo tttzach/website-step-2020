@@ -15,25 +15,10 @@
 // Fetches comments from the server and adds it to the DOM
 function getCommentForm() {
   fetch('/comment-form')
-    .then(response => response.json())
+    .then((response) => (response.json()))
     .then((comments) => {
       document.getElementById('comment-container').innerHTML = comments;
     });
-}
-
-// Fetches comments from the datastore and adds them to the DOM
-function loadComments(maxInt, language) {
-  const max = maxInt.toString();
-  fetch('/list-comments?max=' + max + '&language=' + language)
-    .then(response => response.json())
-    .then(comments => {
-      const commentListElement = document.getElementById('comments-list');
-      commentListElement.innerHTML = "";
-      comments.forEach(comment => {
-        commentListElement.appendChild(createCommentElement(comment));
-    })
-  });
-  return false;
 }
 
 // Creates an element that represents a comment
@@ -46,4 +31,20 @@ function createCommentElement(comment) {
 
   commentElement.appendChild(textElement);
   return commentElement;
+}
+
+// Fetches comments from the datastore and adds them to the DOM
+function loadComments(maxInt, language) {
+  const max = maxInt.toString();
+  fetch('/list-comments?max=' + max + '&language=' + language)
+    .then(response => response.json())
+    .then(comments => {
+      const commentListElement = document.getElementById('comments-list');
+      commentListElement.innerHTML = "";
+      comments.forEach(comment => {
+        commentListElement.appendChild(createCommentElement(comment));
+    });
+  });
+  // Ensures that the HTML form which calls this function does not redirect
+  return false;
 }
