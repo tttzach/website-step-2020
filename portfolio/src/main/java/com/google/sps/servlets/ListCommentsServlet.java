@@ -43,7 +43,9 @@ public class ListCommentsServlet extends HttpServlet {
     int max = getMax(request);
     String language = getLanguage(request);
     List<String> comments = getCommentsToDisplay(results, max, language, response);
-    sendJson(response, comments);
+    response.setContentType("text/html; charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
+    JsonUtil.sendJson(response, comments);
   }
 
   private PreparedQuery prepareQuery() {
@@ -82,20 +84,12 @@ public class ListCommentsServlet extends HttpServlet {
     return comments;
   }
 
-  private void sendJson(HttpServletResponse response, List<String> comments) throws IOException {
-    Gson gson = new Gson();
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
-  }
-
-  private String getTranslation(String originalText, String languageCode, HttpServletResponse response) {
+  private String getTranslation(String originalText, String languageCode) {
     Translate translate = TranslateOptions.getDefaultInstance().getService();
     Translation translation = translate.translate(
       originalText, 
       Translate.TranslateOption.targetLanguage(languageCode)
     );
-    response.setContentType("text/html; charset=UTF-8");
-    response.setCharacterEncoding("UTF-8");
     return translation.getTranslatedText();
   }
   
