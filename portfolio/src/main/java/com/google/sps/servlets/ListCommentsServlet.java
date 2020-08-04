@@ -42,6 +42,8 @@ public class ListCommentsServlet extends HttpServlet {
     int max = getMax(request);
     String language = getLanguage(request);
     List<String> comments = getCommentsToDisplay(results, max, language);
+    response.setContentType("text/html; charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
     JsonUtil.sendJson(response, comments);
   }
 
